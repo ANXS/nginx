@@ -14,3 +14,6 @@
 
 - include: modules/headers_more_module.yml
   when: nginx_source_modules_included.headers_more_module is defined
+
+- include: modules/http_auth_request_module.yml
+  when: nginx_source_modules_included.http_auth_request_module is defined

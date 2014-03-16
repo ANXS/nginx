@@ -1,0 +1,14 @@
+# file: nginx/tasks/modules/http_gzip_static_module.yml
+# configure flag: --with-http_auth_request_module --add-module=/tmp/nginx_auth_request
+
+- name: Nginx | Modules | Download the http_auth_request_module source
+  get_url:
+    url: "{{nginx_auth_request_url}}"
+    dest: "/tmp/nginx-auth-request-module.tar.gz"
+
+- name: Nginx | Modules | Unpack the http_auth_request_module source
+  command: tar -xvzf /tmp/nginx-auth-request-module.tar.gz chdir=/tmp creates=/tmp/ngx_http_auth_request_module-{{nginx_auth_request_release}}
+
+- name: Nginx | Modules | Copy the http_auth_request_module source folder
+  command: sudo cp -R /tmp/nginx-auth-request-module-{{nginx_auth_request_release}} /tmp/nginx_auth_request
+
