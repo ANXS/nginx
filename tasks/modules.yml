@@ -23,3 +23,6 @@
 
 - include: modules/google_perftools_module.yml
   when: nginx_source_modules_included.google_perftools_module is defined
+
+- include: modules/ipv6_module.yml
+  when: nginx_source_modules_included.ipv6_module is defined

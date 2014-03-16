@@ -31,6 +31,7 @@ nginx_source_modules_included:
   http_auth_request_module: "--add-module=/tmp/nginx_auth_request"
   http_echo_module: "--add-module=/tmp/nginx_echo"
   google_perftools_module: "--with-google_perftools_module"
+  ipv6_module: "--with-ipv6"
 
 nginx_source_modules_excluded:
   - mail_pop3_module
@@ -95,7 +96,7 @@ nginx_gzip_types:
   - application/ecmascript
   - application/json
   - image/svg+xml
-nginx_gzip_disable: "MSIE [1-6]\."
+nginx_gzip_disable: "MSIE [1-6]\\."
 nginx_keepalive: on
 nginx_keepalive_timeoute: 30
 nginx_client_body_timeout: 10
