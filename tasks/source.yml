@@ -1,0 +1,24 @@
+# file: nginx/tasks/source.yml
+
+- include: user.yml
+- include: directories.yml
+
+- name: Nginx | Make sure the Nginx build dependencies are installed
+  apt:
+    pkg: {{item}}
+    state: present
+  with_items:
+    - libpcre3
+    - libpcre3-dev
+    - libssl-dev
+
+- name: Nginx | Download the Nginx source release if not yet present
+  get_url:
+    url: "{{nginx_source_url}}"
+    dest: "/tmp/nginx-{{nginx_source_version}}.tar.gz"
+
+- include: "modules/{{item}}.yml"
+  with_items: nginx_source_modules_included
+
+- name: Nginx | Unpack the compressed Nginx source
+  command: tar -xvzf /tmp/nginx-{{nginx_source_version}}.tar.gz chdir=/tmp/nginx-{{nginx_source_version}}/README

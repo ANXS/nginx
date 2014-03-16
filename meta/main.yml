@@ -1,4 +1,4 @@
-# file: xxx/meta/main.yml
+# file: nginx/meta/main.yml
 
 galaxy_info:
   author: pjan vandaele

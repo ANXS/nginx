@@ -1,2 +1,9 @@
 # nginx/tasks/configure.yml
 
+- name: Nginx | Make sure the mime.types file is up to date
+  copy:
+    src: mime.types
+    dest: "{{nginx_dir}}/mime.types"
+    owner: root
+    group: root
+    mode: 0644

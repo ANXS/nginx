@@ -1,4 +1,7 @@
 # file: nginx/tasks/main.yml
 
-- include: "{{nginx_install_method}}.yml"
+- include: package.yml
+  when: nginx_install_method == "package"
+- include: source.yml
+  when: nginx_install_method == "source"
 - include: configure.yml
