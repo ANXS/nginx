@@ -1,0 +1,4 @@
+# file: nginx/tasks/main.yml
+
+- include: "{{nginx_install_method}}.yml"
+- include: configure.yml

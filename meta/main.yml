@@ -1,0 +1,19 @@
+# file: xxx/meta/main.yml
+
+galaxy_info:
+  author: pjan vandaele
+  company: Ansibles
+  description: Install and configure Nginx
+  min_ansible_version: 1.4
+  license: MIT
+  platforms:
+  - name: Ubuntu
+    versions:
+    - all
+  categories:
+  - system
+
+dependencies:
+  - Ansibles.apt
+  - Ansibles.build-essential
+  - Ansibles.monit
