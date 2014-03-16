@@ -5,7 +5,7 @@
 
 - name: Nginx | Make sure the Nginx build dependencies are installed
   apt:
-    pkg: {{item}}
+    pkg: "{{item}}"
     state: present
   with_items:
     - libpcre3
@@ -17,8 +17,21 @@
     url: "{{nginx_source_url}}"
     dest: "/tmp/nginx-{{nginx_source_version}}.tar.gz"
 
-- include: "modules/{{item}}.yml"
-  with_items: nginx_source_modules_included
+- include: "modules.yml"
 
 - name: Nginx | Unpack the compressed Nginx source
-  command: tar -xvzf /tmp/nginx-{{nginx_source_version}}.tar.gz chdir=/tmp/nginx-{{nginx_source_version}}/README
+  command: tar -xvzf /tmp/nginx-{{nginx_source_version}}.tar.gz chdir=/tmp creates=/tmp/nginx-{{nginx_source_version}}/README
+
+- name: Nginx | Compile the Nginx source
+  shell: >
+    cd /tmp/nginx-{{nginx_source_version}} &&
+    ./configure {{nginx_source_configure_flags}} &&
+    make &&
+    make install
+
+- name: Nginx | Update the symbolic link to the nginx install
+  file:
+    path: /usr/local/nginx/default
+    src: "{{nginx_source_prefix}}"
+    state: link
+    force: yes

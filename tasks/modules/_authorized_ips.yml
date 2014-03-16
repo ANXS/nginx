@@ -1,0 +1,9 @@
+# file: nginx/tasks/modules/authorized_ips.yml
+
+- name: Nginx | Modules | Updated the authorized_ip file
+  template:
+    src: ../../../templates/modules/authorized_ip.j2
+    dest: "{{nginx_dir}}/authorized_ip"
+    owner: root
+    group: root
+    mode: 0644

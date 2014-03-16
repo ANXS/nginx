@@ -1,0 +1,19 @@
+# file: nginx/tasks/modules/http_stub_status_module.yml
+# configure flag: --with-http_stub_status_module
+
+- include: _authorized_ips.yml
+
+- name: Nginx | Modules | Make sure the nginx status configuration is updated
+  tempate:
+    src: ../../../tempates/modules/nginx.status.j2
+    dest: "{{nginx_dir}}/sites-available/nginx_status"
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Nginx | Modules | Enable the status stub sites-available
+  file:
+    path: "{{nginx_dir}}/sites-enabled/nginx_status"
+    src: "{{nginx_dir}}/sites-available/nginx_status"
+    state: link
+    force: yes

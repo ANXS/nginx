@@ -14,21 +14,24 @@ nginx_pid: "/var/run/nginx.pid"
 
 nginx_source_version: "1.5.3"
 
-nginx_source_prefix: "/opt/nginx-{{nginx_source_version}}"
+nginx_source_prefix: "/usr/local/nginx/nginx-{{nginx_source_version}}"
 nginx_source_conf_path: "{{nginx_dir}}/nginx.conf"
 nginx_source_sbin_path: "{{nginx_source_prefix}}/sbin/nginx"
 nginx_source_default_configure_flags: "--prefix={{nginx_source_prefix}} --conf-path={{nginx_source_conf_path}} --sbin-path={{nginx_source_sbin_path}}"
 
-nginx_source_configure_flags: []
+
 nginx_source_url: "http://nginx.org/download/nginx-{{nginx_source_version}}.tar.gz"
 
-nginx_source_modules_included: []
+nginx_source_modules_included:
+  - http_stub_status_module: "--with-http_stub_status_module"
+
+nginx_source_modules_excluded:
+  - mail_pop3_module
+  - mail_imap_module
+  - mail_smtp_module
 
 
-
-
-
-
+nginx_source_configure_flags: "{{nginx_source_default_configure_flags}}{% for key, value in nginx_source_modules_included %} {{value}}{% endfor %}{% for item in nginx_source_modules_excluded %} --without-{{item}}{% endfor %}"
 
 
 
@@ -121,11 +124,6 @@ nginx_types_hash_max_size: 2048
 nginx_types_hash_bucket_size: 64
 nginx_proxy_read_timeout:
 nginx_client_max_body_size:
-
-# nginx-http_stub_status_module settings
-nginx_status_remote_ip_var: remote_addr
-nginx_status_authorized_ips:
-  - 127.0.0.1/32
 
 # nginx-upload_progress_module
 nginx_upload_progress_version: 0.9.0
