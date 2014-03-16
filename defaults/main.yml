@@ -1,6 +1,6 @@
 # file: nginx/defaults/main.yml
 
-nginx_install_method: "package"          # choose between source and package
+nginx_install_method: "source"          # choose between source and package
 
 nginx_user: www-data
 nginx_group: www-data
@@ -28,7 +28,7 @@ nginx_source_modules_included:
   http_gzip_static_module: "--with-http_gzip_static_module"
   upload_progress_module: "--add-module=/tmp/nginx_upload_progress"
   headers_more_module: "--add-module=/tmp/nginx_headers_more"
-  http_auth_request_module: "--with-http_auth_request_module --add-module=/tmp/nginx_auth_request"
+  http_auth_request_module: "-add-module=/tmp/nginx_auth_request"
 
 nginx_source_modules_excluded:
   - mail_pop3_module
