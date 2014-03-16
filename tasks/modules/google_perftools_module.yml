@@ -1,0 +1,7 @@
+# file: roles/nginx/tasks/modules/google_perftools_module.yml
+# configure flag: --with-google_perftools_module
+
+- name: Nginx | Modules | Make sure the libgoogle-perftools-dev package is installed
+  apt:
+    pkg: libgoogle-perftools-dev
+    state: present

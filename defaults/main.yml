@@ -30,6 +30,7 @@ nginx_source_modules_included:
   headers_more_module: "--add-module=/tmp/nginx_headers_more"
   http_auth_request_module: "--add-module=/tmp/nginx_auth_request"
   http_echo_module: "--add-module=/tmp/nginx_echo"
+  google_perftools_module: "--with-google_perftools_module"
 
 nginx_source_modules_excluded:
   - mail_pop3_module

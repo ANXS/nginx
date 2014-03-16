@@ -20,3 +20,6 @@
 
 - include: modules/http_echo_module.yml
   when: nginx_source_modules_included.http_echo_module is defined
+
+- include: modules/google_perftools_module.yml
+  when: nginx_source_modules_included.google_perftools_module is defined
