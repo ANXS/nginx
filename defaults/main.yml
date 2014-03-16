@@ -70,34 +70,6 @@ nginx_echo_url: "https://github.com/agentzh/echo-nginx-module/archive/v{{nginx_e
 
 
 
-
-nginx_dir: /etc/nginx
-nginx_www_dir: /srv/www
-nginx_log_dir: /var/log/nginx
-nginx_binary: /usr/sbin/nginx
-nginx_pid: /var/run/nginx.pid
-
-nginx_setup_default: true
-
-# nginx install from source settings
-nginx_source_install_prefix: /usr/local/etc
-nginx_source_install_conf_path: /etc/nginx/nginx.conf
-
-nginx_source_modules_include:
-# <modulename-as-in-modules.yml>: <configure-flag>
-  http_uwsgi_module: " "
-  google_perftools_module: "--with-google_perftools_module"
-  http_ssl_module: "--with-http_ssl_module"
-  http_gzip_static_module: "--with-http_gzip_static_module"
-  ipv6: "--with-ipv6"
-  http_stub_status_module: "--with-http_stub_status_module"
-  upload_progress_module: "--add-module=/tmp/nginx-upload-progress-module"
-
-nginx_source_modules_exclude:
-  - mail_pop3_module
-  - mail_imap_module
-  - mail_smtp_module
-
 # nginx.conf settings
 nginx_daemon_disable: false
 nginx_gzip: 'on'
@@ -122,6 +94,7 @@ nginx_gzip_types:
   - application/ecmascript
   - application/json
   - image/svg+xml
+nginx_gzip_disable: "MSIE [1-6]\."
 nginx_keepalive: on
 nginx_keepalive_timeoute: 30
 nginx_client_body_timeout: 10
@@ -139,12 +112,16 @@ nginx_multi_accept: 'on'
 nginx_event:
 nginx_server_names_hash_bucket_size: 64
 nginx_sendfile: 'on'
-nginx_disable_access_log: false
-nginx_default_site_enabled: true
+nginx_disable_access_log: no
+# nginx_error_log_options: ""
+# nginx_access_log_options: ""
+nginx_default_site_enabled: yes
 nginx_types_hash_max_size: 2048
 nginx_types_hash_bucket_size: 64
 nginx_proxy_read_timeout:
 nginx_client_max_body_size:
-
-# nginx-upload_progress_module
-nginx_upload_progress_version: 0.9.0
+# nginx_server_tokens:
+nginx_enable_rate_limiting: no
+nginx_rate_limiting_zone_name: "default"
+nginx_rate_limiting_backoff: "10m"
+nginx_rate_limit: "1r/s"
