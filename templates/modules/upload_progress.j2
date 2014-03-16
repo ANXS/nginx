@@ -1,0 +1,4 @@
+upload_progress {{nginx_upload_progress_zone_name}} {{nginx_upload_progress_zone_size}};
+{% if nginx_upload_progress_javascript_output %}
+upload_progress_java_output;
+{% endif %}

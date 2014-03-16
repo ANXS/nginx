@@ -1,0 +1,23 @@
+# file: nginx/tasks/modules/upload_progress_module.yml
+# configure flag: --add-module=/tmp/nginx_upload_progress
+
+# to be completed...
+
+- name: Nginx | Modules | Download the upload_progress_module source
+  get_url:
+    url: "{{nginx_upload_progress_url}}"
+    dest: "/tmp/nginx-upload-progress-module-{{nginx_upload_progress_version}}.tar.gz"
+
+- name: Nginx | Modules | Unpack the upload_progress_module source
+  command: tar -xvzf /tmp/nginx-upload-progress-module-{{nginx_upload_progress_version}}.tar.gz chdir=/tmp creates=/tmp/nginx-upload-progress-module-{{nginx_upload_progress_version}}
+
+- name: Nginx | Modules | Copy the upload_progress_module source folder
+  command: sudo cp -R /tmp/nginx-upload-progress-module-{{nginx_upload_progress_version}} /tmp/nginx-upload-progress-module
+
+- name: Nginx | Modules | Make sure the upload_progress_module configuration is updated
+  template:
+    src: ../../templates/modules/upload_progress.j2
+    dest: "{{nginx_dir}}/sites-available/upload_progress"
+    owner: root
+    group: root
+    mode: 0644
