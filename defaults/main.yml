@@ -28,7 +28,8 @@ nginx_source_modules_included:
   http_gzip_static_module: "--with-http_gzip_static_module"
   upload_progress_module: "--add-module=/tmp/nginx_upload_progress"
   headers_more_module: "--add-module=/tmp/nginx_headers_more"
-  http_auth_request_module: "-add-module=/tmp/nginx_auth_request"
+  http_auth_request_module: "--add-module=/tmp/nginx_auth_request"
+  http_echo_module: "--add-module=/tmp/nginx_echo"
 
 nginx_source_modules_excluded:
   - mail_pop3_module
@@ -61,7 +62,11 @@ nginx_headers_more_url: "https://github.com/agentzh/headers-more-nginx-module/ar
 nginx_auth_request_release: "662785733552"
 nginx_auth_request_url: "http://mdounin.ru/hg/ngx_http_auth_request_module/archive/{{nginx_auth_request_release}}.tar.gz"
 
+# http_echo_module configuration
+nginx_echo_version: "0.51"
+nginx_ech_url: "https://github.com/agentzh/echo-nginx-module/archive/v{{nginx_echo_version}}.tar.gz"
 
+#
 
 
 
