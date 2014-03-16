@@ -1,0 +1,10 @@
+# file: nginx/tasks/modules/http_realip_module.yml
+# configure flag: --with-http_realip_module
+
+- name: Nginx | Modules | Update the http_realip_module configuration
+  template:
+    src: ../../templates/modules/http_realip.conf.j2
+    dest: "{{nginx_dir}}/conf.d/http_realip.conf"
+    owner: root
+    group: root
+    mode: 0644

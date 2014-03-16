@@ -1,4 +1,4 @@
-# file: nginx/tasks/modules/headers_more_module.yml
+# file: nginx/tasks/modules/http_echo_module.yml
 # configure flag: --add-module=/tmp/nginx_echo
 
 - name: Nginx | Modules | Download the http_echo_module source

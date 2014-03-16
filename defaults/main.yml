@@ -32,6 +32,7 @@ nginx_source_modules_included:
   http_echo_module: "--add-module=/tmp/nginx_echo"
   google_perftools_module: "--with-google_perftools_module"
   ipv6_module: "--with-ipv6"
+  http_real_ip_module: "--with-http_realip_module"
 
 nginx_source_modules_excluded:
   - mail_pop3_module
@@ -68,7 +69,10 @@ nginx_auth_request_url: "http://mdounin.ru/hg/ngx_http_auth_request_module/archi
 nginx_echo_version: "0.51"
 nginx_echo_url: "https://github.com/agentzh/echo-nginx-module/archive/v{{nginx_echo_version}}.tar.gz"
 
-#
+# http_realip_module configuration
+nginx_realip_header: "X-Forwarded-For"
+nginx_realip_addresses: ["127.0.0.1"]
+nginx_realip_real_ip_recursive: "off"
 
 
 
