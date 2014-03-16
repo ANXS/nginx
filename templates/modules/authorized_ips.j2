@@ -1,4 +1,4 @@
-geo {{nginx_remote_ip_var}} $authorized_ip {
+geo ${{nginx_remote_ip_var}} $authorized_ip {
   default no;
 {% for ip in nginx_authorized_ips %}
   {{ip}} yes;

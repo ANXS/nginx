@@ -11,7 +11,7 @@
 - name: Nginx | Make sure the Nginx configuration is updated
   template:
     src: nginx.conf.j2
-    dest: {{nginx_dir}}/nginx.conf
+    dest: "{{nginx_dir}}/nginx.conf"
     owner: root
     group: root
     mode: 0644
