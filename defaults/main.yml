@@ -24,6 +24,7 @@ nginx_source_url: "http://nginx.org/download/nginx-{{nginx_source_version}}.tar.
 
 nginx_source_modules_included:
   http_stub_status_module: "--with-http_stub_status_module"
+  http_ssl_module: "--with-http_ssl_module"
 
 nginx_source_modules_excluded:
   - mail_pop3_module
