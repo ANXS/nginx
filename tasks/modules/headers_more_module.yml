@@ -3,7 +3,7 @@
 
 - name: Nginx | Modules | Download the headers_more_module source
   get_url:
-    url: "{{nginx_headers_more_url"
+    url: "{{nginx_headers_more_url}}"
     dest: "/tmp/nginx-headers-more-module-{{nginx_headers_more_version}}.tar.gz"
 
 - name: Nginx | Modules | Unpack the headers_more_module source
