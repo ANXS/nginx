@@ -1,5 +1,0 @@
-# file: nginx/defaults/modules/authorized_ips.yml
-
-nginx_remote_ip_var: "remote_addr"
-nginx_authorized_ips:
-  - "127.0.0.1/32"

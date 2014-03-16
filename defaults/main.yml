@@ -30,12 +30,11 @@ nginx_source_modules_excluded:
   - mail_imap_module
   - mail_smtp_module
 
-
 nginx_source_configure_flags: "{{nginx_source_default_configure_flags}}{% for key, value in nginx_source_modules_included %} {{value}}{% endfor %}{% for item in nginx_source_modules_excluded %} --without-{{item}}{% endfor %}"
 
-
-
-
+nginx_remote_ip_var: "remote_addr"
+nginx_authorized_ips:
+  - "127.0.0.1/32"
 
 
 
