@@ -5,7 +5,7 @@
 
 - name: Nginx | Modules | Make sure the nginx status configuration is updated
   template:
-    src: ../../../tempates/modules/nginx.status.j2
+    src: ../../templates/modules/nginx.status.j2
     dest: "{{nginx_dir}}/sites-available/nginx_status"
     owner: root
     group: root
