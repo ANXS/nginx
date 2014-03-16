@@ -11,3 +11,6 @@
 
 - include: modules/upload_progress_module.yml
   when: nginx_source_modules_included.upload_progress_module is defined
+
+- include: modules/headers_more_module.yml
+  when: nginx_source_modules_included.headers_more_module is defined
