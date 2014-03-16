@@ -1,0 +1,4 @@
+# file: nginx/tasks/modules/http_spdy_module.yml
+# configure flag: --with-http_spdy_module
+
+# no contents
