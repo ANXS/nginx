@@ -3,7 +3,8 @@
 - name: Nginx | Copy the nxensite and nxdissite scripts
   template:
     src: "{{item}}.j2"
-    dest: "/user/sbin/{{item}}"
+    dest: "/usr/sbin/{{item}}"
     owner: root
     group: root
     mode: 0755
+  with_items: ["nxensite", "nxdissite"]

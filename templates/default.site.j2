@@ -2,7 +2,7 @@ server {
   listen   80;
   server_name  {{inventory_hostname}};
 
-  access_log  {{nginx_log_dir}}/localhost.access.log;
+  access_log  {{nginx_log_dir}}/default.access.log;
 
   location / {
     root   {{nginx_default_root}};
