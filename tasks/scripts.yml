@@ -1,0 +1,9 @@
+# file: nginx/tasks/scripts.yml
+
+- name: Nginx | Copy the nxensite and nxdissite scripts
+  template:
+    src: "{{item}}.j2"
+    dest: "/user/sbin/{{item}}"
+    owner: root
+    group: root
+    mode: 0755
