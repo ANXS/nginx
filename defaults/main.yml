@@ -35,6 +35,7 @@ nginx_source_modules_included:
   http_real_ip_module: "--with-http_realip_module"
   http_spdy_module: "--with-http_spdy_module"
   http_perl_module: "--with-http_perl_module"
+  naxsi_module: "--add-module=/tmp/nginx_naxsi"
 
 nginx_source_modules_excluded:
   - mail_pop3_module
@@ -75,6 +76,10 @@ nginx_echo_url: "https://github.com/agentzh/echo-nginx-module/archive/v{{nginx_e
 nginx_realip_header: "X-Forwarded-For"
 nginx_realip_addresses: ["127.0.0.1"]
 nginx_realip_real_ip_recursive: "off"
+
+# naxsi_module configuration
+nginx_naxsi_version: "0.52"
+nginx_naxsi_url: "https://github.com/nbs-system/naxsi/archive/{{nginx_naxsi_version}}.tar.gz"
 
 
 

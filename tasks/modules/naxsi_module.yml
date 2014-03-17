@@ -1,0 +1,20 @@
+# file: roles/nginx/tasks/modules/naxsi_module.yml
+# configure flag: --add-module=/tmp/nginx_naxsi
+
+- name: Nginx | Modules | Download the naxsi_module source
+  get_url: "{{nginx_naxsi_url}}"
+  dest: "/tmp/nginx-naxsi-module.tar.gz"
+
+- name: Nginx | Modules | Unpack the naxsi_module source
+  command: tar -xvzf /tmp/nginx-naxsi-module.tar.gz chdir=/tmp creates=/tmp/naxsi-{{nginx_naxsi_version}}
+
+- name: Nginx | Moduels | Copy the naxsi_module source folder
+  command: sudo cp -R /tmp/naxsi-{{nginx_naxsi_version}}/naxsi_src /tmp/nginx_naxsi
+
+- name: Nginx | Modules | Make sure the naxsi_module configuration is up to date
+  copy:
+    src: ../../files/naxsi_core.rules
+    dest: "{{nginx_dir}}/naxsi_core.rules"
+    owner: root
+    group: root
+    mode: 0644
