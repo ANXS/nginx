@@ -117,6 +117,10 @@ nginx_sites:
 ```
 
 
+##### Monit ?
+You can put Nginx under monit monitoring protection, by setting `monit_protection: yes`
+
+
 ##### Modules
 
 ###### gzip module

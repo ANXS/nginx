@@ -9,4 +9,4 @@
 - include: default_site.yml
 - include: sites.yml
 - include: monit.yml
-  when: monit_protection == true
+  when: monit_protection is defined and monit_protection == true
