@@ -1,6 +1,7 @@
 # file: nginx/defaults/main.yml
 
-nginx_install_method: "source"          # choose between source and package
+nginx_install_method: "source"
+nginx_source_version: "1.5.3"
 
 nginx_user: www-data
 nginx_group: www-data
@@ -12,15 +13,46 @@ nginx_www_dir: "/srv/www"
 nginx_log_dir: "/var/log/nginx"
 nginx_pid: "/var/run/nginx.pid"
 
-nginx_source_version: "1.5.3"
 
+# nginx.conf
+nginx_worker_processes: 4
+nginx_daemon_disable: no
+nginx_worker_rlimit_nofile: null
+nginx_error_log_options: null
+nginx_worker_connections: 1024
+nginx_multi_accept: 'on'
+nginx_event: null
+nginx_disable_access_log: no
+nginx_access_log_options: null
+nginx_server_tokens: null
+nginx_sendfile: 'on'
+nginx_keepalive: "on"
+nginx_keepalive_timeoute: "30"
+nginx_client_body_timeout: "10"
+nginx_client_header_timeout: "10"
+nginx_send_timeout: "10"
+nginx_buffers: "on"
+nginx_client_body_buffer_size: "8k"
+nginx_client_header_buffer_size: "1k"
+nginx_client_max_body_size: "2m"
+nginx_large_client_header_buffers: "2 1k"
+nginx_server_names_hash_bucket_size: 64
+nginx_types_hash_max_size: 2048
+nginx_types_hash_bucket_size: 64
+nginx_proxy_read_timeout: null
+nginx_client_max_body_size: null
+nginx_enable_rate_limiting: no
+nginx_rate_limiting_zone_name: "default"
+nginx_rate_limiting_backoff: "10m"
+nginx_rate_limit: "1r/s"
+
+
+# source
+nginx_source_url: "http://nginx.org/download/nginx-{{nginx_source_version}}.tar.gz"
 nginx_source_prefix: "/usr/local/nginx/nginx-{{nginx_source_version}}"
 nginx_source_conf_path: "{{nginx_dir}}/nginx.conf"
 nginx_source_sbin_path: "{{nginx_source_prefix}}/sbin/nginx"
 nginx_source_default_configure_flags: "--prefix={{nginx_source_prefix}} --conf-path={{nginx_source_conf_path}} --sbin-path={{nginx_source_sbin_path}}"
-
-
-nginx_source_url: "http://nginx.org/download/nginx-{{nginx_source_version}}.tar.gz"
 
 nginx_source_modules_included:
   http_stub_status_module: "--with-http_stub_status_module"
@@ -45,52 +77,13 @@ nginx_source_modules_excluded:
 nginx_source_configure_flags: "{{nginx_source_default_configure_flags}}{% for key, value in nginx_source_modules_included.items() %} {{value}}{% endfor %}{% for item in nginx_source_modules_excluded %} --without-{{item}}{% endfor %}"
 
 
-# http_stub_status_module configuration
-nginx_remote_ip_var: "remote_addr"
-nginx_authorized_ips:
-  - "127.0.0.1/32"
-
-# http_gzip_static_module configuration
-nginx_gzip_static: "off"
-
-# upload_progress_module configuration
-nginx_upload_progress_version: "0.9.0"
-nginx_upload_progress_javascript_output: yes
-nginx_upload_progress_zone_name: "proxied"
-nginx_upload_progress_zone_size: "1m"
-nginx_upload_progress_url: "https://github.com/masterzen/nginx-upload-progress-module/archive/v{{nginx_upload_progress_version}}.tar.gz"
-
-# headers_more_module configuration
-nginx_headers_more_version: "0.25"
-nginx_headers_more_url: "https://github.com/agentzh/headers-more-nginx-module/archive/v{{nginx_headers_more_version}}.tar.gz"
-
-# http_auth_request_module configuration
-nginx_auth_request_release: "662785733552"
-nginx_auth_request_url: "http://mdounin.ru/hg/ngx_http_auth_request_module/archive/{{nginx_auth_request_release}}.tar.gz"
-
-# http_echo_module configuration
-nginx_echo_version: "0.51"
-nginx_echo_url: "https://github.com/agentzh/echo-nginx-module/archive/v{{nginx_echo_version}}.tar.gz"
-
-# http_realip_module configuration
-nginx_realip_header: "X-Forwarded-For"
-nginx_realip_addresses: ["127.0.0.1"]
-nginx_realip_real_ip_recursive: "off"
-
-# naxsi_module configuration
-nginx_naxsi_version: "0.52"
-nginx_naxsi_url: "https://github.com/nbs-system/naxsi/archive/{{nginx_naxsi_version}}.tar.gz"
-
-
-
-# nginx.conf settings
-nginx_daemon_disable: false
+# gzip_module
 nginx_gzip: 'on'
 nginx_gzip_http_version: 1.1
 nginx_gzip_comp_level: 2
 nginx_gzip_proxied: expired no-cache no-store private auth
 nginx_gzip_vary: 'on'
-nginx_gzip_buffers:
+nginx_gzip_buffers: null
 nginx_gzip_min_length: 10240
 nginx_gzip_types:
   - text/plain
@@ -108,33 +101,46 @@ nginx_gzip_types:
   - application/json
   - image/svg+xml
 nginx_gzip_disable: "MSIE [1-6]\\."
-nginx_keepalive: on
-nginx_keepalive_timeoute: 30
-nginx_client_body_timeout: 10
-nginx_client_header_timeout: 10
-nginx_send_timeout: 10
-nginx_buffers: 'on'
-nginx_client_body_buffer_size: 8k
-nginx_client_header_buffer_size: 1k
-nginx_client_max_body_size: 2m
-nginx_large_client_header_buffers: 2 1k
-nginx_worker_processes: 4
-nginx_worker_connections: 1024
-nginx_worker_rlimit_nofile:
-nginx_multi_accept: 'on'
-nginx_event:
-nginx_server_names_hash_bucket_size: 64
-nginx_sendfile: 'on'
-nginx_disable_access_log: no
-# nginx_error_log_options: ""
-# nginx_access_log_options: ""
-nginx_default_site_enabled: yes
-nginx_types_hash_max_size: 2048
-nginx_types_hash_bucket_size: 64
-nginx_proxy_read_timeout:
-nginx_client_max_body_size:
-# nginx_server_tokens:
-nginx_enable_rate_limiting: no
-nginx_rate_limiting_zone_name: "default"
-nginx_rate_limiting_backoff: "10m"
-nginx_rate_limit: "1r/s"
+
+
+# http_stub_status_module configuration
+nginx_remote_ip_var: "remote_addr"
+nginx_authorized_ips:
+  - "127.0.0.1/32"
+
+# http_gzip_static_module configuration
+nginx_gzip_static: "off"
+
+
+# upload_progress_module configuration
+nginx_upload_progress_version: "0.9.0"
+nginx_upload_progress_javascript_output: yes
+nginx_upload_progress_zone_name: "proxied"
+nginx_upload_progress_zone_size: "1m"
+nginx_upload_progress_url: "https://github.com/masterzen/nginx-upload-progress-module/archive/v{{nginx_upload_progress_version}}.tar.gz"
+
+
+# headers_more_module configuration
+nginx_headers_more_version: "0.25"
+nginx_headers_more_url: "https://github.com/agentzh/headers-more-nginx-module/archive/v{{nginx_headers_more_version}}.tar.gz"
+
+
+# http_auth_request_module configuration
+nginx_auth_request_release: "662785733552"
+nginx_auth_request_url: "http://mdounin.ru/hg/ngx_http_auth_request_module/archive/{{nginx_auth_request_release}}.tar.gz"
+
+
+# http_echo_module configuration
+nginx_echo_version: "0.51"
+nginx_echo_url: "https://github.com/agentzh/echo-nginx-module/archive/v{{nginx_echo_version}}.tar.gz"
+
+
+# http_realip_module configuration
+nginx_realip_header: "X-Forwarded-For"
+nginx_realip_addresses: ["127.0.0.1"]
+nginx_realip_real_ip_recursive: "off"
+
+
+# naxsi_module configuration
+nginx_naxsi_version: "0.52"
+nginx_naxsi_url: "https://github.com/nbs-system/naxsi/archive/{{nginx_naxsi_version}}.tar.gz"

@@ -7,7 +7,7 @@ daemon off;
 worker_rlimit_nofile {{nginx_worker_rlimit_nofile}};
 {% endif %}
 
-error_log  {{nginx_log_dir}}/error.log{% if nginx_error_log_options is defined %} {{nginx_error_log_options}}{% endif %};
+error_log  {{nginx_log_dir}}/error.log{% if nginx_error_log_options %} {{nginx_error_log_options}}{% endif %};
 pid        {{nginx_pid}};
 
 events {
@@ -34,9 +34,9 @@ http {
 {% if nginx_disable_access_log %}
   access_log    off;
 {% else %}
-  access_log    {{nginx_log_dir}}/access.log{% if nginx_access_log_options is defined %} {{nginx_access_log_options}}{% endif %};
+  access_log    {{nginx_log_dir}}/access.log{% if nginx_access_log_options %} {{nginx_access_log_options}}{% endif %};
 {% endif %}
-{% if nginx_server_tokens is defined %}
+{% if nginx_server_tokens %}
   server_tokens {{nginx_server_tokens}};
 {% endif %}
 
@@ -69,7 +69,7 @@ http {
 {% if nginx_buffers == 'on' %}
   client_body_buffer_size  {{nginx_client_body_buffer_size}};
   client_header_buffer_size  {{nginx_client_header_buffer_size}};
-  # client_max_body_size  {{nginx_client_max_body_size}};
+  client_max_body_size  {{nginx_client_max_body_size}};
   large_client_header_buffers  {{nginx_large_client_header_buffers}};
 {% endif %}
 
@@ -78,9 +78,6 @@ http {
   types_hash_bucket_size {{nginx_types_hash_bucket_size}};
 {% if nginx_proxy_read_timeout %}
   proxy_read_timeout {{nginx_proxy_read_timeout}};
-{% endif %}
-{% if nginx_client_max_body_size %}
-  client_max_body_size {{nginx_client_max_body_size}};
 {% endif %}
 
 {% if nginx_enable_rate_limiting %}
