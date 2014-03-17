@@ -34,6 +34,7 @@ nginx_source_modules_included:
   ipv6_module: "--with-ipv6"
   http_real_ip_module: "--with-http_realip_module"
   http_spdy_module: "--with-http_spdy_module"
+  http_perl_module: "--with-http_perl_module"
 
 nginx_source_modules_excluded:
   - mail_pop3_module

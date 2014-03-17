@@ -1,0 +1,4 @@
+# file: nginx/tasks/modules/http_perl_module.yml
+# configure flag: --with-http_perl_module
+
+# no contents
