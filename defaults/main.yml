@@ -27,7 +27,7 @@ nginx_access_log_options: null
 nginx_server_tokens: null
 nginx_sendfile: 'on'
 nginx_keepalive: "on"
-nginx_keepalive_timeoute: "30"
+nginx_keepalive_timeout: "30"
 nginx_client_body_timeout: "10"
 nginx_client_header_timeout: "10"
 nginx_send_timeout: "10"
@@ -40,7 +40,6 @@ nginx_server_names_hash_bucket_size: 64
 nginx_types_hash_max_size: 2048
 nginx_types_hash_bucket_size: 64
 nginx_proxy_read_timeout: null
-nginx_client_max_body_size: null
 nginx_enable_rate_limiting: no
 nginx_rate_limiting_zone_name: "default"
 nginx_rate_limiting_backoff: "10m"

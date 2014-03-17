@@ -112,9 +112,9 @@ nginx_source_modules_included:
 
 ###### upload_progress module
 - `nginx_upload_progress_version` - version of the upload_progress module
-- `nginx_upload_progress_javascript_output`
-- `nginx_upload_progress_zone_name`
-- `nginx_upload_progress_zone_size`
+- `nginx_upload_progress_javascript_output`- sets output in javascript. The default is true for backwards compatibility
+- `nginx_upload_progress_zone_name` - assigns one name which will be used to store the per-connection tracking information. The default is proxied
+- `nginx_upload_progress_zone_size` - assigns the zone size in bytes. Default is 1m (1 megabyte)
 
 ###### headers_more module
 - `nginx_headers_more_version` - version of the headers_more module
@@ -126,9 +126,9 @@ nginx_source_modules_included:
 - `nginx_echo_version` - version of the http_echo module
 
 ###### http_realip module
-- `nginx_realip_header`
-- `nginx_realip_addresses`
-- `nginx_realip_real_ip_recursive`
+- `nginx_realip_header` - Sets the header to use for the RealIp Module; only accepts "X-Forwarded-For" or "X-Real-IP"
+- `nginx_realip_addresses` - Sets the addresses to use for the http_realip configuration
+- `nginx_realip_real_ip_recursive` - If recursive search is enabled, the original client address that matches one of the trusted addresses is replaced by the last non-trusted address sent in the request header field. Can be on "on" or "off". The default is "off"
 
 ###### naxsi module
 - `nginx_naxsi_version` - version of the naxsi module
