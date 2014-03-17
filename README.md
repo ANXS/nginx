@@ -90,6 +90,33 @@ nginx_source_modules_included:
   naxsi_module: "--add-module=/tmp/nginx_naxsi"
 ```
 
+##### Sites
+
+There is a possibility to configure a list of servers to be available (not yet enabled) as well. Just provide a list of dictionaries according to the following format:
+
+```yaml
+nginx_sites:
+  - server:
+      name: foo
+      listen: 8080
+      server_name: localhost
+      location1:
+        name: "/"
+        try_files: "$uri $uri/ /index.html"
+        sendfile: "on"
+  - server:
+      name: bar
+      listen: 8888
+      server_name: webmail.localhost
+      location1:
+        name: /
+        try_files: "$uri $uri/ /index.html"
+      location2:
+        name: /images/
+        try_files: "$uri $uri/ /index.html"
+```
+
+
 ##### Modules
 
 ###### gzip module
