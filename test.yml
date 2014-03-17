@@ -2,4 +2,15 @@
   vars_files:
     - 'defaults/main.yml'
   tasks:
+    - name: install the dependencies:
+      apt:
+        pkg: "{{item}}"
+        state: present
+      with_items: ["perl", "libperl-dev", "monit", "autoconf", "binutils-doc", "bison", "build-essential", "flex", "gettext", "ncurses-dev"]
     - include: 'tasks/main.yml'
+  handlers:
+    - name: restart monit
+      service:
+        name: monit
+        state: restarted
+    - include: 'handlers/main.yml'
