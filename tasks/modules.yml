@@ -32,3 +32,6 @@
 
 - include: modules/http_spdy_module.yml
   when: nginx_source_modules_included.http_spdy_module is defined
+
+- include: modules/naxsi_module.yml
+  when: nginx_source_modules_included.naxsi_module is defined
