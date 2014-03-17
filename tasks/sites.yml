@@ -2,7 +2,7 @@
 
 - name: Nginx | Update the configurations for the sites inventory
   template:
-    src: site:j2
-    dest: "{{nginx_dir}}/sites-available/{{item.name}}"
+    src: site.j2
+    dest: "{{nginx_dir}}/sites-available/{{item.server.name}}"
   with_items: nginx_sites
-  when: nginx_sites|length > 0
+  when: nginx_sites|lower != 'none'
