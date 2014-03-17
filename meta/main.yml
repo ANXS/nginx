@@ -16,4 +16,5 @@ galaxy_info:
 dependencies:
   - Ansibles.apt
   - Ansibles.build-essential
+  - Ansibles.perl
   - Ansibles.monit
