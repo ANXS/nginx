@@ -45,6 +45,9 @@ nginx_rate_limiting_zone_name: "default"
 nginx_rate_limiting_backoff: "10m"
 nginx_rate_limit: "1r/s"
 
+# default site
+nginx_default_root: "{{nginx_www_dir}}/default"
+
 
 # source
 nginx_source_url: "http://nginx.org/download/nginx-{{nginx_source_version}}.tar.gz"

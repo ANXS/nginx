@@ -5,6 +5,7 @@
 - include: source.yml
   when: nginx_install_method == "source"
 - include: configure.yml
+- include: default_site.yml
 - include: sites.yml
 - include: monit.yml
   when: monit_protection == true
