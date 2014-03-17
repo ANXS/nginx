@@ -2,7 +2,7 @@
   vars_files:
     - 'defaults/main.yml'
   tasks:
-    - name: install the dependencies:
+    - name: install the dependencies
       apt:
         pkg: "{{item}}"
         state: present
