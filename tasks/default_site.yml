@@ -1,9 +1,17 @@
 # file: nginx/tasks/default_site.yml
 
+- name: Nginx | Make sure the default site root directory is present
+  file:
+    path: "{{nginx_default_root}}"
+    state: directory
+    owner: "{{nginx_user}}"
+    group: "{{nginx_user}}"
+    mode: 0644
+
 - name: Nginx | Update the default site configuration
   template:
     src: default.site.j2
-    dest: "{{nginx_dir}}/sites-available"
+    dest: "{{nginx_dir}}/sites-available/default"
     owner: root
     group: root
     mode: 0644
