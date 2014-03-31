@@ -22,6 +22,7 @@ nginx_error_log_options: null
 nginx_worker_connections: 1024
 nginx_multi_accept: 'on'
 nginx_event: null
+nginx_charset: null
 nginx_disable_access_log: no
 nginx_access_log_options: null
 nginx_server_tokens: null

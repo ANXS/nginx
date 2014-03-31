@@ -38,6 +38,7 @@ Currently it's been developed for, and tested on Ubuntu. It is assumed to work o
 - `nginx_error_log_options` - option flags for the error_log
 - `nginx_worker_connections` - sets the number of worker connections
 - `nginx_multi_accept` - used for config value of events { multi_accept }. Try to accept() as many connections as possible. Can be set to yes or no
+- `nginx_charset` - used to specify an explicit default charset (say, 'utf-8', 'off'…)
 - `nginx_disable_access_log` - whether or not to disable the access log, yes or no
 - `nginx_access_log_options` - option flags for the access_log
 - `nginx_server_tokens` - whether to send the Nginx version number in error pages and Server header, on or off
