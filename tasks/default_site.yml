@@ -6,7 +6,7 @@
     state: directory
     owner: "{{nginx_user}}"
     group: "{{nginx_user}}"
-    mode: 0644
+    mode: 0754
 
 - name: Nginx | Update the default site configuration
   template:
