@@ -7,7 +7,7 @@ daemon off;
 worker_rlimit_nofile {{nginx_worker_rlimit_nofile}};
 {% endif %}
 
-error_log  {{nginx_log_dir}}/error.log{% if nginx_error_log_options %} {{nginx_error_log_options}}{% endif %};
+error_log  {{nginx_log_dir}}/{{nginx_error_log_filename}}{% if nginx_error_log_options %} {{nginx_error_log_options}}{% endif %};
 pid        {{nginx_pid}};
 
 events {
@@ -21,8 +21,10 @@ events {
 }
 
 http {
+{% if nginx_install_method == "source" %}
 {% if nginx_source_modules_included.naxsi_module is defined %}
   include       {{nginx_dir}}/naxsi_core.rules;
+{% endif %}
 {% endif %}
 
   include       {{nginx_dir}}/mime.types;
@@ -32,13 +34,13 @@ http {
   charset {{nginx_charset}};
 {% endif %}
 
-  # Use the apache log formatting
-  log_format  main  '$remote_addr - $remote_user [$time_local] "$request" $status $body_bytes_sent "$http_referer" "$http_user_agent"';
-
 {% if nginx_disable_access_log %}
   access_log    off;
 {% else %}
-  access_log    {{nginx_log_dir}}/access.log{% if nginx_access_log_options %} {{nginx_access_log_options}}{% endif %};
+{% for log in nginx_access_logs %}
+  log_format  {{log['name']}}  {{log['format']}};
+  access_log    {{nginx_log_dir}}/{{log['filename']}} {{log['name']}}{% if log['options'] %} {{log['options']}}{% endif %};
+{% endfor %}
 {% endif %}
 {% if nginx_server_tokens %}
   server_tokens {{nginx_server_tokens}};
@@ -68,6 +70,11 @@ http {
   gzip_types {{nginx_gzip_types|join(' ')}};
   gzip_min_length {{nginx_gzip_min_length}};
   gzip_disable     "{{nginx_gzip_disable}}";
+{% endif %}
+
+{% if nginx_geoip == 'on' %}
+  geoip_country {{nginx_geoip_country}};
+  geoip_city {{nginx_geoip_city}};
 {% endif %}
 
 {% if nginx_buffers == 'on' %}

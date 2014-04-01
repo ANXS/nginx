@@ -1,4 +1,4 @@
-## Ansibles - nginx [![Build Status](https://travis-ci.org/Ansibles/nginx.png)](https://travis-ci.org/Ansibles/nginx)
+## ANXS - nginx [![Build Status](https://travis-ci.org/ANXS/nginx.svg?branch=master)](https://travis-ci.org/ANXS/nginx)
 
 Ansible role which installs and configures Nginx, from a package or from source (including a series of optional modules).
 
@@ -8,10 +8,10 @@ Ansible role which installs and configures Nginx, from a package or from source 
 ##### Ansible
 
 It has been tested on Ansible 1.5 and above, and depends on the following roles:
-  - Ansibles.apt
-  - Ansibles.build-essential
-  - Ansibles.perl
-  - Ansibles.monit (if you want monit protection)
+  - ANXS.apt
+  - ANXS.build-essential
+  - ANXS.perl
+  - ANXS.monit (if you want monit protection)
 
 
 ##### Platforms
@@ -36,6 +36,7 @@ Currently it's been developed for, and tested on Ubuntu. It is assumed to work o
 - `nginx_daemon_disable` - whether the daemon should be disabled which can be set to yes or no
 - `nginx_worker_rlimit_nofile` - used for config value of `worker_rlimit_nofile`. Can replace any "ulimit -n" command. The value depend on your usage (cache or not) but must always be superior than worker_connections. Set to `null` to ignore
 - `nginx_error_log_options` - option flags for the error_log
+- `nginx_error_log_filename` - filename for the error log
 - `nginx_worker_connections` - sets the number of worker connections
 - `nginx_multi_accept` - used for config value of events { multi_accept }. Try to accept() as many connections as possible. Can be set to yes or no
 - `nginx_charset` - used to specify an explicit default charset (say, 'utf-8', 'off'…)
@@ -62,6 +63,15 @@ Currently it's been developed for, and tested on Ubuntu. It is assumed to work o
 - `nginx_rate_limiting_zone_name` - sets the shared memory zone
 - `nginx_rate_limiting_backoff` - sets the maximum burst size of requests
 - `nginx_rate_limit` - sets the rate (e.g. 1r/s)
+- `nginx_access_logs` - a list of access log formats, filenames and options
+
+        nginx_access_logs:
+          - name: "main"
+            format: '$remote_addr - $remote_user [$time_local] "$request" $status $body_bytes_sent "$http_referer" "$http_user_agent"'
+            options: null
+            filename: "access.log"
+- `nginx_default_root` - the directory to place the default site
+- `nginx_default_enable` - whether or not to actually enable the defaul site
 
 ##### source
 - `nginx_source_version` - the version of Nginx to install
@@ -79,16 +89,17 @@ nginx_source_modules_included:
   http_stub_status_module: "--with-http_stub_status_module"
   http_ssl_module: "--with-http_ssl_module"
   http_gzip_static_module: "--with-http_gzip_static_module"
-  upload_progress_module: "--add-module=/tmp/nginx_upload_progress"
-  headers_more_module: "--add-module=/tmp/nginx_headers_more"
-  http_auth_request_module: "--add-module=/tmp/nginx_auth_request"
-  http_echo_module: "--add-module=/tmp/nginx_echo"
+  upload_progress_module: "--add-module=/tmp/nginx-upload-progress-module-{{nginx_upload_progress_version}}"
+  headers_more_module: "--add-module=/tmp/headers-more-nginx-module-{{nginx_headers_more_version}}"
+  http_auth_request_module: "--add-module=/tmp/ngx_http_auth_request_module-{{nginx_auth_request_release}}"
+  http_echo_module: "--add-module=/tmp/echo-nginx-module-{{nginx_echo_version}}"
   google_perftools_module: "--with-google_perftools_module"
   ipv6_module: "--with-ipv6"
   http_real_ip_module: "--with-http_realip_module"
   http_spdy_module: "--with-http_spdy_module"
   http_perl_module: "--with-http_perl_module"
-  naxsi_module: "--add-module=/tmp/nginx_naxsi"
+  naxsi_module: "--add-module=/tmp/naxsi-{{nginx_naxsi_version}}/naxsi_src"
+  ngx_pagespeed: "--add-module=/tmp/ngx_pagespeed-release-{{nginx_ngx_pagespeed_version}}-beta"
 ```
 
 ##### Sites
@@ -117,6 +128,17 @@ nginx_sites:
         try_files: "$uri $uri/ /index.html"
 ```
 
+To enable or disable specific sites you can add prior used `server_name` attribute to the variables `nginx_enabled_sites` and `nginx_disabled_sites`.
+
+```yaml
+nginx_enabled_sites:
+  - localhost
+```
+
+```yaml
+nginx_disabled_sites:
+  - webmail.localhost
+```
 
 ##### Monit ?
 You can put Nginx under monit monitoring protection, by setting `monit_protection: yes`
@@ -165,10 +187,16 @@ You can put Nginx under monit monitoring protection, by setting `monit_protectio
 ###### naxsi module
 - `nginx_naxsi_version` - version of the naxsi module
 
-###### Thanks
+#### Thanks
 
 To the contributors:
 - [Jean-Denis Vauguet](https://github.com/chikamichi)
+
+
+#### Testing
+This project comes with a VagrantFile, this is a fast and easy way to test changes to the role, fire it up with `vagrant up`
+
+See [vagrant docs](https://docs.vagrantup.com/v2/) for getting setup with vagrant
 
 
 #### License
@@ -178,4 +206,4 @@ Licensed under the MIT License. See the LICENSE file for details.
 
 #### Feedback, bug-reports, requests, ...
 
-Are [welcome](https://github.com/ansibles/nginx/issues)!
+Are [welcome](https://github.com/ANXS/nginx/issues)!

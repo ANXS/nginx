@@ -1,0 +1,32 @@
+# file: nginx/tasks/modules/ngx_pagespeed.yml
+# configure flag: --add-module=/tmp/ngx_pagespeed-release-{{nginx_ngx_pagespeed_version}}-beta
+
+- name: Nginx | Modules | Make sure the dependences are installed
+  apt:
+    pkg: "{{item}}"
+  with_items:
+    - zlib1g-dev
+    - libpcre3
+    - libpcre3-dev
+
+- name: Nginx | Modules | Download the ngx_pagespeed source
+  get_url:
+    url: "https://github.com/pagespeed/ngx_pagespeed/archive/release-{{nginx_ngx_pagespeed_version}}-beta.tar.gz"
+    dest: "/tmp/ngx_pagespeed_module.tar.gz"
+
+- name: Nginx | Modules | Unpack the ngx_pagespeed source
+  command: tar -xvzf /tmp/ngx_pagespeed_module.tar.gz
+  args:
+    chdir: /tmp
+    creates: "/tmp/ngx_pagespeed-release-{{nginx_ngx_pagespeed_version}}-beta"
+
+- name: Nginx | Modules | Download the psol source
+  get_url:
+    url: "https://dl.google.com/dl/page-speed/psol/{{nginx_ngx_pagespeed_version}}.tar.gz"
+    dest: "/tmp/ngx_pagespeed-release-{{nginx_ngx_pagespeed_version}}-beta/psol.tar.gz"
+
+- name: Nginx | Modules | Unpack the psol source
+  command: "tar -xvzf /tmp/ngx_pagespeed-release-{{nginx_ngx_pagespeed_version}}-beta/psol.tar.gz"
+  args:
+    chdir: "/tmp/ngx_pagespeed-release-{{nginx_ngx_pagespeed_version}}-beta"
+    creates: "/tmp/ngx_pagespeed-release-{{nginx_ngx_pagespeed_version}}-beta/psol"

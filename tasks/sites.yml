@@ -6,3 +6,31 @@
     dest: "{{nginx_dir}}/sites-available/{{item.server.name}}"
   with_items: nginx_sites
   when: nginx_sites|lower != 'none'
+
+- name: Nginx | Create virtual sites directories
+  file:
+    path: "{{nginx_www_dir}}/{{item.server.name}}"
+    state: directory
+    owner: "{{nginx_user}}"
+    group: "{{nginx_user}}"
+    mode: 0755
+  with_items: nginx_sites
+
+- name: Nginx | Enable sites
+  file:
+    path: "{{nginx_dir}}/sites-enabled/{{item}}"
+    src: "{{nginx_dir}}/sites-available/{{item}}"
+    state: link
+  with_items: nginx_enabled_sites
+  notify:
+    - reload nginx
+  when: nginx_enabled_sites|lower != 'none'
+
+- name: Nginx | Disable sites
+  file:
+    path: "{{nginx_dir}}/sites-enabled/{{item}}"
+    state: absent
+  with_items: nginx_disabled_sites
+  notify:
+    - reload nginx
+  when: nginx_disabled_sites|lower != 'none'

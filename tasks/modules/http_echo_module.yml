@@ -8,6 +8,3 @@
 
 - name: Nginx | Modules | Unpack the http_echo_module source
   command: tar -xvzf /tmp/nginx-echo-module.tar.gz chdir=/tmp creates=/tmp/echo-nginx-module-{{nginx_echo_version}}
-
-- name: Nginx | Modules | Copy the http_echo_module source folder
-  command: sudo cp -R /tmp/echo-nginx-module-{{nginx_echo_version}} /tmp/nginx_echo
