@@ -165,7 +165,7 @@ You can put Nginx under monit monitoring protection, by setting `monit_protectio
 ###### naxsi module
 - `nginx_naxsi_version` - version of the naxsi module
 
-###### Thanks
+#### Thanks
 
 To the contributors:
 - [Jean-Denis Vauguet](https://github.com/chikamichi)
