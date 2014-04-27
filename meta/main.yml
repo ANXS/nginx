@@ -18,4 +18,5 @@ dependencies:
   - Ansibles.apt
   - Ansibles.build-essential
   - Ansibles.perl
-  - Ansibles.monit
+  - role: Ansibles.monit
+    when: monit_protection is defined and monit_protection == true
