@@ -1,6 +1,6 @@
 # file: nginx/defaults/main.yml
 
-nginx_install_method: "source"
+nginx_install_method: "package"
 nginx_source_version: "1.5.3"
 
 nginx_user: www-data
