@@ -93,7 +93,7 @@ http {
 
 {% if nginx_upstreams is defined %}
 {% if nginx_proxy_next_upstream %}
-proxy_next_upstream {{ nginx_proxy_next_upstream }}
+proxy_next_upstream {{ nginx_proxy_next_upstream }};
 
 {% endif %}
 {% for upstream in nginx_upstreams %}
