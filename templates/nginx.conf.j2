@@ -97,7 +97,7 @@ proxy_next_upstream {{ nginx_proxy_next_upstream }};
 
 {% endif %}
 {% for upstream in nginx_upstreams %}
-upstream {
+upstream {{ upstream.name }} {
 {% if upstream.zone is defined %}
   zone {{ upstream.zone.name }} {{upstream.zone.size }};
 {% endif %}
