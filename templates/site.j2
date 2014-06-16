@@ -1,7 +1,17 @@
 
 server {
 
-{% for field in item.server.iterkeys()|difference(['location']) %}
+{% if item.server.name is defined %}
+  {% if item.server.name is string %}
+  server_name {{ item.server.name }}
+  {% else %}
+  {% for name in item.server.name %}
+  server_name {{ name }}
+  {% endfor %}
+  {% endif %}
+{% endif %}
+
+{% for field in item.server.iterkeys()|difference(['location', 'name']) %}
 {% if item.server[field] is string or item.server[field] is not iterable %}
   {{ field }} {{ item.server[field] }};
 {% else %}
