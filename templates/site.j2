@@ -3,10 +3,10 @@ server {
 
 {% if item.server.name is defined %}
   {% if item.server.name is string %}
-  server_name {{ item.server.name }}
+  server_name {{ item.server.name }};
   {% else %}
   {% for name in item.server.name %}
-  server_name {{ name }}
+  server_name {{ name }};
   {% endfor %}
   {% endif %}
 {% endif %}
@@ -35,7 +35,7 @@ server {
 {% endfor %}
   }
 {% if item.server['location'][field] is string %}
-{{ field }}
+{{ field }};
 {% endif %}
 {% endfor %}
 {% endif %}
