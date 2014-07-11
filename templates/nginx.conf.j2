@@ -21,8 +21,10 @@ events {
 }
 
 http {
+{% if nginx_install_method == "source"}
 {% if nginx_source_modules_included.naxsi_module is defined %}
   include       {{nginx_dir}}/naxsi_core.rules;
+{% endif %}
 {% endif %}
 
   include       {{nginx_dir}}/mime.types;
