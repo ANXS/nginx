@@ -13,12 +13,4 @@ galaxy_info:
   categories:
   - system
 
-dependencies:
-  - Ansibles.hostname
-  - Ansibles.apt
-  - role: Ansibles.build-essential
-    when: nginx_install_method is defined and nginx_install_method == "source"
-  - role: Ansibles.perl
-    when: nginx_install_method is defined and nginx_install_method == "source"
-  - role: Ansibles.monit
-    when: monit_protection is defined and monit_protection == true
+dependencies: []
