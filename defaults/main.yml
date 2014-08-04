@@ -76,6 +76,7 @@ nginx_source_modules_included:
   http_spdy_module: "--with-http_spdy_module"
   http_perl_module: "--with-http_perl_module"
   naxsi_module: "--add-module=/tmp/nginx_naxsi"
+  ngx_pagespeed: "--add-module=/tmp/ngx_pagespeed"
 
 nginx_source_modules_excluded:
   - mail_pop3_module
@@ -152,3 +153,6 @@ nginx_realip_real_ip_recursive: "off"
 # naxsi_module configuration
 nginx_naxsi_version: "0.52"
 nginx_naxsi_url: "https://github.com/nbs-system/naxsi/archive/{{nginx_naxsi_version}}.tar.gz"
+
+# ngx_pagespeed_module configuration
+nginx_ngx_pagespeed_version: 1.8.31.4
