@@ -101,20 +101,28 @@ nginx_sites:
       name: foo
       listen: 8080
       server_name: localhost
-      location1:
-        name: "/"
-        try_files: "$uri $uri/ /index.html"
-        sendfile: "on"
+      location:
+        - name: "/"
+          try_files: "$uri $uri/ /index.html"
+          sendfile: "on"
   - server:
-      name: bar
-      listen: 8888
-      server_name: webmail.localhost
-      location1:
-        name: /
-        try_files: "$uri $uri/ /index.html"
-      location2:
-        name: /images/
-        try_files: "$uri $uri/ /index.html"
+     name:
+      - example.org
+      - www.example.org
+      - help.example.org
+
+     listen: 8002
+     location:
+     - name: "/"
+       proxy_pass_header:
+         - "Server"
+       proxy_set_header:
+         - "Host $http_host"
+         - "X-Real-IP $remote_addr"
+         - "X-Scheme $scheme"
+
+       proxy_redirect: "off"
+       proxy_pass: "http://features_service_guaranteed"
 ```
 
 
