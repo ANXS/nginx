@@ -1,17 +1,42 @@
+
 server {
 
-{% for k,v in item.server.iteritems() %}
-{% if k.find('location') == -1 and k != 'name' %}
-  {{ k }} {{ v }};
+{% if item.server.name is defined %}
+{% if item.server.name is string %}
+  server_name {{ item.server.name }};
+{% else %}
+{% for name in item.server.name %}
+  server_name {{ name }};
+{% endfor %}
+{% endif %}
+{% endif %}
+
+{% for field in item.server.iterkeys()|difference(['location', 'name']) %}
+{% if item.server[field] is string or item.server[field] is not iterable %}
+  {{ field }} {{ item.server[field] }};
+{% else %}
+{% for element in item.server[field] %}
+  {{ field }} {{ element }};
+{% endfor %}
 {% endif %}
 {% endfor %}
+{% if item.server['location'] is defined %}
+{% for location_entry in item.server['location'] %}
 
-{% for k,v in item.server.iteritems() if k.find('location') != -1 %}
-  location {{ v.name }} {
-{% for x,y in v.iteritems() if x != 'name' %}
-    {{ x }} {{ y }};
+  location {{ location_entry.name }} {
+{% for field in location_entry.iterkeys()|difference(['name']) %}
+{% if location_entry[field] is string or location_entry[field] is not iterable %}
+    {{ field }} {{ location_entry[field] }};
+{% else %}
+{% for element in location_entry[field] %}
+    {{ field }} {{ element }};
+{% endfor %}
+{% endif %}
 {% endfor %}
   }
+{% if item.server['location'][field] is string %}
+{{ field }};
+{% endif %}
 {% endfor %}
-
+{% endif %}
 }

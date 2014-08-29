@@ -50,6 +50,9 @@ http {
   tcp_nopush on;
   tcp_nodelay on;
 
+
+
+
 {% if nginx_keepalive == 'on' %}
   # Timeouts
   keepalive_timeout  {{nginx_keepalive_timeout}};
@@ -88,6 +91,38 @@ http {
 
 {% if nginx_enable_rate_limiting %}
   limit_req_zone $binary_remote_addr zone={{nginx_rate_limiting_zone_name}}:{{nginx_rate_limiting_backoff}} rate={{nginx_rate_limit}};
+{% endif %}
+
+{% if nginx_upstreams is defined %}
+{% if nginx_proxy_next_upstream %}
+proxy_next_upstream {{ nginx_proxy_next_upstream }};
+
+{% endif %}
+{% for upstream in nginx_upstreams %}
+upstream {{ upstream.name }} {
+{% if upstream.zone is defined %}
+  zone {{ upstream.zone.name }} {{upstream.zone.size }};
+{% endif %}
+{% if upstream.directives is defined %}
+{% for directive in upstream.directives %}
+  {{ directive }};
+{% endfor %}
+{% endif %}
+{% if upstream.servers is defined %}
+{% for server in upstream.servers %}
+{% set param_strings = [] %}
+{% if server.params is defined %}
+{% for k,v in server.params.iteritems() %}
+{% do param_strings.append("%s=%s"|format(k,v)) %}
+{% endfor %}
+{% endif %}
+  server {{ server['address'] }} {{ param_strings|join(' ') }};
+{% endfor %}
+{% endif %}
+
+}
+
+{% endfor %}
 {% endif %}
 
   include {{nginx_dir}}/conf.d/*.conf;

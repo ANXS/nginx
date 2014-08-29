@@ -14,11 +14,11 @@ galaxy_info:
   - system
 
 dependencies:
-  - Ansibles.hostname
-  - Ansibles.apt
-  - role: Ansibles.build-essential
+  - pjan.vandaele.hostname
+  - pjan.vandaele.apt
+  - role: pjan.vandaele.build-essential
     when: nginx_install_method is defined and nginx_install_method == "source"
-  - role: Ansibles.perl
+  - role: pjan.vandaele.perl
     when: nginx_install_method is defined and nginx_install_method == "source"
-  - role: Ansibles.monit
+  - role: pjan.vandaele.monit
     when: monit_protection is defined and monit_protection == true
