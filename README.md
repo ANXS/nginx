@@ -8,10 +8,10 @@ Ansible role which installs and configures Nginx, from a package or from source 
 ##### Ansible
 
 It has been tested on Ansible 1.5 and above, and depends on the following roles:
-  - Ansibles.apt
-  - Ansibles.build-essential
-  - Ansibles.perl
-  - Ansibles.monit (if you want monit protection)
+  - pjan.vandaele.apt
+  - pjan.vandaele.build-essential
+  - pjan.vandaele.perl
+  - pjan.vandaele.monit (if you want monit protection)
 
 
 ##### Platforms
