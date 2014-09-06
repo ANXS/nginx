@@ -1,4 +1,4 @@
-## Ansibles - nginx [![Build Status](https://travis-ci.org/Ansibles/nginx.png)](https://travis-ci.org/Ansibles/nginx)
+## ANXS - nginx [![Build Status](https://travis-ci.org/ANXS/nginx.png)](https://travis-ci.org/ANXS/nginx)
 
 Ansible role which installs and configures Nginx, from a package or from source (including a series of optional modules).
 
@@ -8,10 +8,10 @@ Ansible role which installs and configures Nginx, from a package or from source 
 ##### Ansible
 
 It has been tested on Ansible 1.5 and above, and depends on the following roles:
-  - Ansibles.apt
-  - Ansibles.build-essential
-  - Ansibles.perl
-  - Ansibles.monit (if you want monit protection)
+  - ANXS.apt
+  - ANXS.build-essential
+  - ANXS.perl
+  - ANXS.monit (if you want monit protection)
 
 
 ##### Platforms
@@ -178,4 +178,4 @@ Licensed under the MIT License. See the LICENSE file for details.
 
 #### Feedback, bug-reports, requests, ...
 
-Are [welcome](https://github.com/ansibles/nginx/issues)!
+Are [welcome](https://github.com/ANXS/nginx/issues)!

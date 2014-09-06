@@ -2,7 +2,7 @@
 
 galaxy_info:
   author: pjan vandaele
-  company: Ansibles
+  company: ANXS
   description: Install and configure Nginx
   min_ansible_version: 1.4
   license: MIT
@@ -14,11 +14,11 @@ galaxy_info:
   - system
 
 dependencies:
-  - Ansibles.hostname
-  - Ansibles.apt
-  - role: Ansibles.build-essential
+  - ANXS.hostname
+  - ANXS.apt
+  - role: ANXS.build-essential
     when: nginx_install_method is defined and nginx_install_method == "source"
-  - role: Ansibles.perl
+  - role: ANXS.perl
     when: nginx_install_method is defined and nginx_install_method == "source"
-  - role: Ansibles.monit
+  - role: ANXS.monit
     when: monit_protection is defined and monit_protection == true
