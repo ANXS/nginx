@@ -19,12 +19,12 @@ nginx_worker_processes: 4
 nginx_daemon_disable: no
 nginx_worker_rlimit_nofile: null
 nginx_error_log_options: null
+nginx_error_log_filename: 'error.log'
 nginx_worker_connections: 1024
 nginx_multi_accept: 'on'
 nginx_event: null
 nginx_charset: null
 nginx_disable_access_log: no
-nginx_access_log_options: null
 nginx_server_tokens: null
 nginx_sendfile: 'on'
 nginx_keepalive: "on"
@@ -45,7 +45,11 @@ nginx_enable_rate_limiting: no
 nginx_rate_limiting_zone_name: "default"
 nginx_rate_limiting_backoff: "10m"
 nginx_rate_limit: "1r/s"
-
+nginx_access_logs:
+  - name: "main"
+    format: '$remote_addr - $remote_user [$time_local] "$request" $status $body_bytes_sent "$http_referer" "$http_user_agent"'
+    options: null
+    filename: "access.log"
 
 # default site
 nginx_default_root: "{{nginx_www_dir}}/default"

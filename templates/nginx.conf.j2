@@ -7,7 +7,7 @@ daemon off;
 worker_rlimit_nofile {{nginx_worker_rlimit_nofile}};
 {% endif %}
 
-error_log  {{nginx_log_dir}}/error.log{% if nginx_error_log_options %} {{nginx_error_log_options}}{% endif %};
+error_log  {{nginx_log_dir}}/{{nginx_error_log_filename}}{% if nginx_error_log_options %} {{nginx_error_log_options}}{% endif %};
 pid        {{nginx_pid}};
 
 events {
@@ -34,13 +34,13 @@ http {
   charset {{nginx_charset}};
 {% endif %}
 
-  # Use the apache log formatting
-  log_format  main  '$remote_addr - $remote_user [$time_local] "$request" $status $body_bytes_sent "$http_referer" "$http_user_agent"';
-
 {% if nginx_disable_access_log %}
   access_log    off;
 {% else %}
-  access_log    {{nginx_log_dir}}/access.log{% if nginx_access_log_options %} {{nginx_access_log_options}}{% endif %};
+{% for log in nginx_access_logs %}
+  log_format  {{log['name']}}  {{log['format']}};
+  access_log    {{nginx_log_dir}}/{{log['filename']}} {{log['name']}}{% if log['options'] %} {{log['options']}}{% endif %};
+{% endfor %}
 {% endif %}
 {% if nginx_server_tokens %}
   server_tokens {{nginx_server_tokens}};
