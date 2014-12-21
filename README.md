@@ -36,6 +36,7 @@ Currently it's been developed for, and tested on Ubuntu. It is assumed to work o
 - `nginx_daemon_disable` - whether the daemon should be disabled which can be set to yes or no
 - `nginx_worker_rlimit_nofile` - used for config value of `worker_rlimit_nofile`. Can replace any "ulimit -n" command. The value depend on your usage (cache or not) but must always be superior than worker_connections. Set to `null` to ignore
 - `nginx_error_log_options` - option flags for the error_log
+- `nginx_error_log_filename` - filename for the error log
 - `nginx_worker_connections` - sets the number of worker connections
 - `nginx_multi_accept` - used for config value of events { multi_accept }. Try to accept() as many connections as possible. Can be set to yes or no
 - `nginx_charset` - used to specify an explicit default charset (say, 'utf-8', 'off'…)
@@ -62,6 +63,14 @@ Currently it's been developed for, and tested on Ubuntu. It is assumed to work o
 - `nginx_rate_limiting_zone_name` - sets the shared memory zone
 - `nginx_rate_limiting_backoff` - sets the maximum burst size of requests
 - `nginx_rate_limit` - sets the rate (e.g. 1r/s)
+- `nginx_access_logs` - a list of access log formats, filenames and options 
+       
+        nginx_access_logs:
+          - name: "main"
+            format: '$remote_addr - $remote_user [$time_local] "$request" $status $body_bytes_sent "$http_referer" "$http_user_agent"'
+            options: null
+            filename: "access.log"
+
 
 ##### source
 - `nginx_source_version` - the version of Nginx to install
