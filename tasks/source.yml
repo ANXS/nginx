@@ -22,12 +22,24 @@
 - name: Nginx | Unpack the compressed Nginx source
   command: tar -xvzf /tmp/nginx-{{nginx_source_version}}.tar.gz chdir=/tmp creates=/tmp/nginx-{{nginx_source_version}}/README
 
+- name: Nginx | Write out the version and flags used for the build
+  template:
+    src: .nginx_compilation_flags.j2
+    dest: /usr/local/nginx/.nginx_compilation_flags
+  register: nginx_flags
+
+- name: Kill Nginx (old threads)
+  command: pkill nginx
+  ignore_errors: yes
+  when: nginx_flags.changed
+
 - name: Nginx | Compile the Nginx source
   shell: >
     cd /tmp/nginx-{{nginx_source_version}} &&
     ./configure {{nginx_source_configure_flags}} &&
     make &&
     make install
+  when: nginx_flags.changed
 
 - name: Nginx | Update the symbolic link to the nginx install
   file:
