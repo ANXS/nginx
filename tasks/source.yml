@@ -25,7 +25,7 @@
 - name: Nginx | Write out the version and flags used for the build
   template:
     src: .nginx_compilation_flags.j2
-    dest: /usr/local/nginx/.nginx_compilation_flags
+    dest: "{{nginx_dir}}/.nginx_compilation_flags"
   register: nginx_flags
 
 - name: Kill Nginx (old threads)
