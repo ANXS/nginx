@@ -6,3 +6,23 @@
     dest: "{{nginx_dir}}/sites-available/{{item.server.name}}"
   with_items: nginx_sites
   when: nginx_sites|lower != 'none'
+
+- name: Nginx | Create virtual sites directories
+  file:
+    path: "{{nginx_www_dir}}/{{item.server.name}}"
+    state: directory
+    owner: "{{nginx_user}}"
+    group: "{{nginx_user}}"
+    mode: 0755
+  with_items: nginx_sites
+  tags: nginx-sites
+
+- name: Nginx | Enable the virtual sites
+  file:
+    path: "{{nginx_dir}}/sites-enabled/{{item.server.name}}"
+    src: "{{nginx_dir}}/sites-available/{{item.server.name}}"
+    state: link
+  with_items: nginx_sites
+  notify:
+    - restart nginx
+  tags: [nginx-sites, nginx-sites-enabled]
