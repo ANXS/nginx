@@ -6,3 +6,22 @@
     dest: "{{nginx_dir}}/sites-available/{{item.server.name}}"
   with_items: nginx_sites
   when: nginx_sites|lower != 'none'
+
+- name: Nginx | Enable sites
+  file:
+    path: "{{nginx_dir}}/sites-enabled/{{item}}"
+    src: "{{nginx_dir}}/sites-available/{{item}}"
+    state: link
+  with_items: nginx_enabled_sites
+  notify:
+    - reload nginx
+  when: nginx_enabled_sites|lower != 'none'
+
+- name: Nginx | Disable sites
+  file:
+    path: "{{nginx_dir}}/sites-enabled/{{item}}"
+    state: absent
+  with_items: nginx_disabled_sites
+  notify:
+    - reload nginx
+  when: nginx_disabled_sites|lower != 'none'

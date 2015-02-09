@@ -57,7 +57,8 @@ nginx_default_root: "{{nginx_www_dir}}/default"
 
 # site inventory
 nginx_sites: []
-
+nginx_enabled_sites: []
+nginx_disabled_sites: []
 
 # source
 nginx_source_url: "http://nginx.org/download/nginx-{{nginx_source_version}}.tar.gz"
