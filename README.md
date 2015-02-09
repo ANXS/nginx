@@ -126,6 +126,17 @@ nginx_sites:
         try_files: "$uri $uri/ /index.html"
 ```
 
+To enable or disable specific sites you can add prior used `server_name` attribute to the variables `nginx_enabled_sites` and `nginx_disabled_sites`.
+
+```yaml
+nginx_enabled_sites:
+  - localhost
+```
+
+```yaml
+nginx_disabled_sites:
+  - webmail.localhost
+```
 
 ##### Monit ?
 You can put Nginx under monit monitoring protection, by setting `monit_protection: yes`
