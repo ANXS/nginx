@@ -81,6 +81,7 @@ nginx_source_modules_included:
   http_spdy_module: "--with-http_spdy_module"
   http_perl_module: "--with-http_perl_module"
   naxsi_module: "--add-module=/tmp/nginx_naxsi"
+  passenger_module: "--add-module=/tmp/nginx_passenger"
 
 nginx_source_modules_excluded:
   - mail_pop3_module

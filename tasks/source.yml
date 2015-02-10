@@ -41,6 +41,17 @@
     make install
   when: nginx_flags.changed
 
+- name: Nginx | get ruby path
+  shell: which ruby
+  register: ruby_path
+  when: nginx_source_modules_included.passenger_module is defined
+
+- name: Nginx | add passenger.conf
+  template:
+    src: passenger.conf.j2
+    dest: /etc/nginx/conf.d/passenger.conf
+  when: nginx_source_modules_included.passenger_module is defined
+
 - name: Nginx | Update the symbolic link to the nginx install
   file:
     path: /usr/local/nginx/default

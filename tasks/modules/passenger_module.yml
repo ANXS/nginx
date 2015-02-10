@@ -1,0 +1,28 @@
+---
+- name: Nginx | Modules | install dependencies
+  apt:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - libcurl4-openssl-dev
+    - ruby-dev
+    - libgemplugin-ruby
+
+- name: Nginx | Modules | install passenger gem
+  sudo: yes
+  gem:
+    name: passenger
+    state: latest
+    user_install: no
+
+- name: Nginx | Modules | get passenger path
+  shell: passenger-config --root
+  register: passenger_path
+
+- name: Nginx | Modules | precompile passenger stuff
+  shell: rake nginx CACHING=false
+  args:
+    chdir: "{{ passenger_path.stdout }}"
+
+- name: Nginx | Modules | copy nginx_passenger to neutral location
+  shell: "cp -R {{ passenger_path.stdout }}/ext/nginx /tmp/nginx_passenger"
