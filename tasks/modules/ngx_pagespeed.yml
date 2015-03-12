@@ -5,11 +5,9 @@
   apt:
     pkg: "{{item}}"
   with_items:
-    - build-essential
     - zlib1g-dev
     - libpcre3
     - libpcre3-dev
-
 
 - name: Nginx | Modules | Download the ngx_pagespeed source
   get_url:
