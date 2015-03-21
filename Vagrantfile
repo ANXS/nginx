@@ -6,7 +6,7 @@ nginx_install_method = ENV.key?('nginx_INSTALL_METHOD') ? ENV['nginx_INSTALL_MET
 Vagrant.configure('2') do |config|
   config.vm.define 'anxs' do |c|
     c.vm.box = 'ubuntu/trusty64'
-    c.vm.network :private_network, ip: '192.168.88.2'
+    c.vm.network :private_network, ip: '192.168.88.15'
     c.vm.hostname = 'anxs.local'
     c.vm.provision 'ansible' do |ansible|
       ansible.playbook = 'test.yml'
