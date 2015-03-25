@@ -6,7 +6,6 @@
     owner: root
     group: root
     mode: 0755
-    recurse: yes
     state: directory
 
 - name: Nginx | Make sure the nginx log directory exists
@@ -15,7 +14,6 @@
     owner: root
     group: root
     mode: 0755
-    recurse: yes
     state: directory
 
 - name: Nginx | Make sure the sites-available, sites-enabled and conf.d directories exist
@@ -24,6 +22,5 @@
     owner: root
     group: root
     mode: 0755
-    recurse: yes
     state: directory
   with_items: ["sites-available", "sites-enabled", "conf.d"]

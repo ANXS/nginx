@@ -10,7 +10,7 @@
   command: tar -xvzf /tmp/nginx-naxsi-module.tar.gz chdir=/tmp creates=/tmp/naxsi-{{nginx_naxsi_version}}
 
 - name: Nginx | Modules | Copy the naxsi_module source folder
-  command: sudo cp -R /tmp/naxsi-{{nginx_naxsi_version}}/naxsi_src /tmp/nginx_naxsi
+  command: sudo cp -R /tmp/naxsi-{{nginx_naxsi_version}}/naxsi_src /tmp/nginx_naxsi creates=/tmp/nginx_naxsi
 
 - name: Nginx | Modules | Make sure the naxsi_module configuration is up to date
   copy:
