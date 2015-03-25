@@ -9,11 +9,11 @@
   apt_repository:
     repo: ppa:nginx/stable
 
-- include: directories.yml
-
 - name: Nginx | Make sure nginx is installed (package)
   apt:
     pkg: nginx
     state: present
   notify:
     - restart nginx
+
+- include: directories.yml

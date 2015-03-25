@@ -1,7 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-nginx_install_method = ENV.key?('nginx_INSTALL_METHOD') ? ENV['nginx_INSTALL_METHOD'] : 'source'
+nginx_install_method = ENV.key?('NGINX_INSTALL_METHOD') ? ENV['NGINX_INSTALL_METHOD'] : 'source'
 
 Vagrant.configure('2') do |config|
   config.vm.define 'anxs' do |c|
