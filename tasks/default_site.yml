@@ -21,5 +21,14 @@
     path: "{{nginx_dir}}/sites-enabled/default"
     src: "{{nginx_dir}}/sites-available/default"
     state: link
+  when: nginx_default_enable
+  notify:
+    - restart nginx
+
+- name: Nginx | Disable the default site
+  file:
+    path: "{{nginx_dir}}/sites-enabled/default"
+    state: absent
+  when: not nginx_default_enable
   notify:
     - restart nginx
