@@ -63,8 +63,8 @@ Currently it's been developed for, and tested on Ubuntu. It is assumed to work o
 - `nginx_rate_limiting_zone_name` - sets the shared memory zone
 - `nginx_rate_limiting_backoff` - sets the maximum burst size of requests
 - `nginx_rate_limit` - sets the rate (e.g. 1r/s)
-- `nginx_access_logs` - a list of access log formats, filenames and options 
-       
+- `nginx_access_logs` - a list of access log formats, filenames and options
+
         nginx_access_logs:
           - name: "main"
             format: '$remote_addr - $remote_user [$time_local] "$request" $status $body_bytes_sent "$http_referer" "$http_user_agent"'
@@ -189,6 +189,12 @@ You can put Nginx under monit monitoring protection, by setting `monit_protectio
 
 To the contributors:
 - [Jean-Denis Vauguet](https://github.com/chikamichi)
+
+
+#### Testing
+This project comes with a VagrantFile, this is a fast and easy way to test changes to the role, fire it up with `vagrant up`
+
+See [vagrant docs](https://docs.vagrantup.com/v2/) for getting setup with vagrant
 
 
 #### License

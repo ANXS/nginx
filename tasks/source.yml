@@ -5,6 +5,7 @@
 
 - name: Nginx | Make sure the Nginx build dependencies are installed
   apt:
+    update_cache: yes
     pkg: "{{item}}"
     state: present
   with_items:
@@ -20,7 +21,8 @@
 - include: "modules.yml"
 
 - name: Nginx | Unpack the compressed Nginx source
-  command: tar -xvzf /tmp/nginx-{{nginx_source_version}}.tar.gz chdir=/tmp creates=/tmp/nginx-{{nginx_source_version}}/README
+  command: tar -xvzf /tmp/nginx-{{nginx_source_version}}.tar.gz
+           chdir=/tmp creates=/tmp/nginx-{{nginx_source_version}}/README
 
 - name: Nginx | Write out the version and flags used for the build
   template:
@@ -28,7 +30,7 @@
     dest: "{{nginx_dir}}/.nginx_compilation_flags"
   register: nginx_flags
 
-- name: Kill Nginx (old threads)
+- name: Nginx | Kill Nginx (old threads)
   command: pkill nginx
   ignore_errors: yes
   when: nginx_flags.changed

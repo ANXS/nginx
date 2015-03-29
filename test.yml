@@ -6,7 +6,7 @@
       apt:
         pkg: "{{item}}"
         state: present
-      with_items: ["perl", "libperl-dev", "monit", "autoconf", "binutils-doc", "bison", "build-essential", "flex", "gettext", "ncurses-dev"]
+      with_items: ["perl", "libperl-dev", "monit"]
     - include: 'tasks/main.yml'
   handlers:
     - name: restart monit

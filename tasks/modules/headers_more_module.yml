@@ -10,4 +10,4 @@
   command: tar -xvzf /tmp/nginx-headers-more-module-{{nginx_headers_more_version}}.tar.gz chdir=/tmp creates=/tmp/headers-more-nginx-module-{{nginx_headers_more_version}}
 
 - name: Nginx | Modules | Copy the headers_more_module source folder
-  command: sudo cp -R /tmp/headers-more-nginx-module-{{nginx_headers_more_version}} /tmp/nginx_headers_more
+  command: sudo cp -R /tmp/headers-more-nginx-module-{{nginx_headers_more_version}} /tmp/nginx_headers_more creates=/tmp/nginx_headers_more
