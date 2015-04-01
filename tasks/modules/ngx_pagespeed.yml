@@ -13,6 +13,7 @@
   get_url:
     url: "https://github.com/pagespeed/ngx_pagespeed/archive/release-{{nginx_ngx_pagespeed_version}}-beta.tar.gz"
     dest: "/tmp/ngx_pagespeed_module.tar.gz"
+  register: ngx_pagespeed_download
 
 - name: Nginx | Modules | Unpack the ngx_pagespeed source
   command: tar -xvzf /tmp/ngx_pagespeed_module.tar.gz
@@ -22,7 +23,7 @@
 
 - name: Nginx | Modules | Copy the ngx_pagespeed source folder
   command: sudo cp -R /tmp/ngx_pagespeed-release-{{nginx_ngx_pagespeed_version}}-beta /tmp/ngx_pagespeed
-
+  when: ngx_pagespeed_download.changed
 
 - name: Nginx | Modules | Download the psol source
   get_url:
