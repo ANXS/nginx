@@ -99,6 +99,7 @@ nginx_source_modules_included:
   http_spdy_module: "--with-http_spdy_module"
   http_perl_module: "--with-http_perl_module"
   naxsi_module: "--add-module=/tmp/nginx_naxsi"
+  ngx_pagespeed: "--add-module=/tmp/ngx_pagespeed"
 ```
 
 ##### Sites
