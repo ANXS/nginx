@@ -58,6 +58,22 @@ http {
   send_timeout  {{nginx_send_timeout}};
 {% endif %}
 
+{% if nginx_ssl_session_cache %}
+  ssl_session_cache {{nginx_ssl_session_cache}}
+{% endif %}
+
+{% if nginx_ssl_protocols %}
+  ssl_session_cache {{nginx_ssl_protocols}}
+{% endif %}
+
+{% if nginx_ssl_ciphers %}
+  ssl_session_cache {{nginx_ssl_ciphers}}
+{% endif %}
+
+{% if nginx_ssl_prefer_server_ciphers %}
+  ssl_session_cache {{nginx_ssl_prefer_server_ciphers}}
+{% endif %}
+
   gzip  {{nginx_gzip}};
 {% if nginx_gzip == 'on' %}
   gzip_http_version {{nginx_gzip_http_version}};

@@ -45,6 +45,11 @@ nginx_enable_rate_limiting: no
 nginx_rate_limiting_zone_name: "default"
 nginx_rate_limiting_backoff: "10m"
 nginx_rate_limit: "1r/s"
+nginx_ssl_session_cache: "builtin:1000  shared:SSL:10m"
+nginx_ssl_protocols: "TLSv1 TLSv1.1 TLSv1.2"
+nginx_ssl_ciphers: "HIGH:!aNULL:!eNULL:!EXPORT:!CAMELLIA:!DES:!MD5:!PSK:!RC4"
+nginx_ssl_prefer_server_ciphers: "on"
+
 nginx_access_logs:
   - name: "main"
     format: '$remote_addr - $remote_user [$time_local] "$request" $status $body_bytes_sent "$http_referer" "$http_user_agent"'
