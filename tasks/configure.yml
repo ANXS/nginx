@@ -8,6 +8,11 @@
     group: root
     mode: 0644
 
+- name: Nginx | Check for existence of Nginx configuration
+  stat:
+    path: "{{nginx_dir}}/nginx.conf"
+  register: nginx_config
+
 - name: Nginx | Make sure the Nginx configuration is updated
   template:
     src: nginx.conf.j2
@@ -23,3 +28,4 @@
     name: nginx
     state: started
   register: nginx_first_start
+  when: not nginx_config.stat.exists
