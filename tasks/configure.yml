@@ -17,3 +17,9 @@
     mode: 0644
   notify:
     - restart nginx
+
+- name: Nginx | Start nginx the first time
+  service:
+    name: nginx
+    state: started
+  register: nginx_first_start

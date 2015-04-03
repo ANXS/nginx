@@ -10,3 +10,4 @@
 - include: sites.yml
 - include: monit.yml
   when: monit_protection is defined and monit_protection == true
+- include: smoke.yml
