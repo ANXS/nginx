@@ -1,3 +1,6 @@
 ---
 - name: Nginx | Check if nginx is available
-  uri: url="http://127.0.0.1" status_code=200
+  uri: url="http://127.0.0.1" status=200
+  register: nginx_up
+  retries: 6
+  delay: 5
