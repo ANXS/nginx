@@ -59,19 +59,19 @@ http {
 {% endif %}
 
 {% if nginx_ssl_session_cache %}
-  ssl_session_cache {{nginx_ssl_session_cache}}
+  ssl_session_cache {{nginx_ssl_session_cache}};
 {% endif %}
 
 {% if nginx_ssl_protocols %}
-  ssl_session_cache {{nginx_ssl_protocols}}
+  nginx_ssl_protocols {{nginx_ssl_protocols}};
 {% endif %}
 
 {% if nginx_ssl_ciphers %}
-  ssl_session_cache {{nginx_ssl_ciphers}}
+  nginx_ssl_ciphers {{nginx_ssl_ciphers}};
 {% endif %}
 
 {% if nginx_ssl_prefer_server_ciphers %}
-  ssl_session_cache {{nginx_ssl_prefer_server_ciphers}}
+  nginx_ssl_prefer_server_ciphers {{nginx_ssl_prefer_server_ciphers}};
 {% endif %}
 
   gzip  {{nginx_gzip}};
