@@ -63,15 +63,15 @@ http {
 {% endif %}
 
 {% if nginx_ssl_protocols %}
-  nginx_ssl_protocols {{nginx_ssl_protocols}};
+  ssl_protocols {{nginx_ssl_protocols}};
 {% endif %}
 
 {% if nginx_ssl_ciphers %}
-  nginx_ssl_ciphers {{nginx_ssl_ciphers}};
+  ssl_ciphers {{nginx_ssl_ciphers}};
 {% endif %}
 
 {% if nginx_ssl_prefer_server_ciphers %}
-  nginx_ssl_prefer_server_ciphers {{nginx_ssl_prefer_server_ciphers}};
+  ssl_prefer_server_ciphers {{nginx_ssl_prefer_server_ciphers}};
 {% endif %}
 
   gzip  {{nginx_gzip}};
