@@ -23,7 +23,7 @@
 
 - name: Nginx | Modules | Copy the ngx_pagespeed source folder
   command: sudo cp -R /tmp/ngx_pagespeed-release-{{nginx_ngx_pagespeed_version}}-beta /tmp/ngx_pagespeed
-  when: ngx_pagespeed_download.changed
+  when: ngx_pagespeed_download|changed
 
 - name: Nginx | Modules | Download the psol source
   get_url:
