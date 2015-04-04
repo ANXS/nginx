@@ -70,6 +70,7 @@ nginx_source_default_configure_flags: "--prefix={{nginx_source_prefix}} --conf-p
 nginx_source_modules_included:
   http_stub_status_module: "--with-http_stub_status_module"
   http_ssl_module: "--with-http_ssl_module"
+  openssl: "--with-openssl=/tmp/openssl-{{ openssl_version }}"
   http_gzip_static_module: "--with-http_gzip_static_module"
   upload_progress_module: "--add-module=/tmp/nginx_upload_progress"
   headers_more_module: "--add-module=/tmp/nginx_headers_more"
@@ -161,3 +162,6 @@ nginx_naxsi_url: "https://github.com/nbs-system/naxsi/archive/{{nginx_naxsi_vers
 
 # ngx_pagespeed_module configuration
 nginx_ngx_pagespeed_version: 1.8.31.4
+
+# OpenSSL configuration
+openssl_version: "1.0.2a"
