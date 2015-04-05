@@ -11,9 +11,6 @@
 - name: Nginx | Modules | Unpack the upload_progress_module source
   command: tar -xvzf /tmp/nginx-upload-progress-module-{{nginx_upload_progress_version}}.tar.gz chdir=/tmp creates=/tmp/nginx-upload-progress-module-{{nginx_upload_progress_version}}
 
-- name: Nginx | Modules | Copy the upload_progress_module source folder
-  command: sudo cp -R /tmp/nginx-upload-progress-module-{{nginx_upload_progress_version}} /tmp/nginx_upload_progress creates=/tmp/nginx_upload_progress
-
 - name: Nginx | Modules | Make sure the upload_progress_module configuration is updated
   template:
     src: ../../templates/modules/upload_progress.j2
