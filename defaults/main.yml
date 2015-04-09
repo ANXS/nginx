@@ -161,7 +161,7 @@ nginx_naxsi_version: "0.52"
 nginx_naxsi_url: "https://github.com/nbs-system/naxsi/archive/{{nginx_naxsi_version}}.tar.gz"
 
 # ngx_pagespeed_module configuration
-nginx_ngx_pagespeed_version: 1.8.31.4
+nginx_ngx_pagespeed_version: 1.9.32.3
 
 # OpenSSL configuration
 openssl_version: "1.0.2a"
