@@ -5,8 +5,22 @@
     path: "{{nginx_default_root}}"
     state: directory
     owner: "{{nginx_user}}"
-    group: "{{nginx_user}}"
+    group: "{{nginx_group}}"
     mode: 0754
+
+- name: Nginx | Check for existing index.html
+  stat:
+    path: "{{nginx_default_root}}/index.html"
+  register: nginx_default_index
+
+- name: Nginx | Copy placeholder index.html
+  copy:
+    src: "index.html"
+    dest: "{{nginx_default_root}}/index.html"
+    owner: "{{nginx_user}}"
+    group: "{{nginx_group}}"
+    mode: 0644
+  when: not nginx_default_index.stat.exists
 
 - name: Nginx | Update the default site configuration
   template:
@@ -21,5 +35,20 @@
     path: "{{nginx_dir}}/sites-enabled/default"
     src: "{{nginx_dir}}/sites-available/default"
     state: link
+  when: nginx_default_enable
   notify:
-    - restart nginx
+    - reload nginx
+
+- name: Nginx | Disable the default site
+  file:
+    path: "{{nginx_dir}}/sites-enabled/default"
+    state: absent
+  when: not nginx_default_enable
+  notify:
+    - reload nginx
+
+- name: Nginx | Reload if we just created index.html
+  service:
+    name: nginx
+    state: reloaded
+  when: not nginx_default_index.stat.exists

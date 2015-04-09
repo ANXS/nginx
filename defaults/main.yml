@@ -53,7 +53,7 @@ nginx_access_logs:
 
 # default site
 nginx_default_root: "{{nginx_www_dir}}/default"
-
+nginx_default_enable: yes
 
 # site inventory
 nginx_sites: []
