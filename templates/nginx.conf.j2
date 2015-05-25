@@ -38,8 +38,10 @@ http {
   access_log    off;
 {% else %}
 {% for log in nginx_access_logs %}
+{% if 'format' in log %}
   log_format  {{log['name']}}  {{log['format']}};
-  access_log    {{nginx_log_dir}}/{{log['filename']}} {{log['name']}}{% if log['options'] %} {{log['options']}}{% endif %};
+{% endif %}
+  access_log    {{nginx_log_dir}}/{{log['filename']}} {{log['name']}}{% if 'options' in log and log['options']|lower != 'none' %} {{log['options']}}{% endif %};
 {% endfor %}
 {% endif %}
 {% if nginx_server_tokens %}
