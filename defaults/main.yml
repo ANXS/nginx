@@ -68,6 +68,21 @@ nginx_source_sbin_path: "{{nginx_source_prefix}}/sbin/nginx"
 nginx_source_default_configure_flags: "--prefix={{nginx_source_prefix}} --conf-path={{nginx_source_conf_path}} --sbin-path={{nginx_source_sbin_path}}"
 
 nginx_source_modules_included:
+  http_stub_status_module: "--with-http_stub_status_module"
+  http_ssl_module: "--with-http_ssl_module"
+  openssl: "--with-openssl=/tmp/openssl-{{ openssl_version }}"
+  http_gzip_static_module: "--with-http_gzip_static_module"
+  upload_progress_module: "--add-module=/tmp/nginx-upload-progress-module-{{nginx_upload_progress_version}}"
+  headers_more_module: "--add-module=/tmp/headers-more-nginx-module-{{nginx_headers_more_version}}"
+  http_auth_request_module: "--add-module=/tmp/ngx_http_auth_request_module-{{nginx_auth_request_release}}"
+  http_echo_module: "--add-module=/tmp/echo-nginx-module-{{nginx_echo_version}}"
+  google_perftools_module: "--with-google_perftools_module"
+  ipv6_module: "--with-ipv6"
+  http_real_ip_module: "--with-http_realip_module"
+  http_spdy_module: "--with-http_spdy_module"
+  http_perl_module: "--with-http_perl_module"
+  naxsi_module: "--add-module=/tmp/naxsi-{{nginx_naxsi_version}}/naxsi_src"
+  ngx_pagespeed: "--add-module=/tmp/ngx_pagespeed-release-{{nginx_ngx_pagespeed_version}}-beta"
   geoip: "--with-http_geoip_module"
 
 nginx_source_modules_excluded:
@@ -105,8 +120,8 @@ nginx_gzip_disable: "MSIE [1-6]\\."
 
 # geoip_module
 nginx_geoip: 'on'
-nginx_geoip_country: /etc/nginx/geoip/GeoIP.dat
-nginx_geoip_city: /etc/nginx/geoip/GeoLiteCity.dat
+nginx_geoip_country: "{{nginx_dir}}/geoip/GeoIP.dat"
+nginx_geoip_city: "{{nginx_dir}}/geoip/GeoLiteCity.dat"
 
 # http_stub_status_module configuration
 nginx_remote_ip_var: "remote_addr"
