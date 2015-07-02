@@ -1,6 +1,9 @@
 - hosts: all
   vars_files:
     - 'defaults/main.yml'
+
+  sudo: yes
+
   tasks:
     - name: install the dependencies
       apt:
