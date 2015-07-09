@@ -194,10 +194,15 @@ To the contributors:
 
 
 #### Testing
-This project comes with a VagrantFile, this is a fast and easy way to test changes to the role, fire it up with `vagrant up`
+This project comes with a VagrantFile, this is a fast and easy way to test changes to the role, fire it up with `vagrant up`. 
 
 See [vagrant docs](https://docs.vagrantup.com/v2/) for getting setup with vagrant
 
+There are two ways to test the install: compiling nginx from source or installing from a package manager.
+By default nginx compiles from source, however if desired, we can set a command line variable to install
+from the package manager
+
+    export NGINX_INSTALL_METHOD=package
 
 #### License
 
