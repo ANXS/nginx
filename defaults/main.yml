@@ -25,7 +25,7 @@ nginx_multi_accept: 'on'
 nginx_event: null
 nginx_charset: null
 nginx_disable_access_log: no
-nginx_server_tokens: null
+nginx_server_tokens: 'off'
 nginx_sendfile: 'on'
 nginx_keepalive: "on"
 nginx_keepalive_timeout: "30"
@@ -33,7 +33,7 @@ nginx_client_body_timeout: "10"
 nginx_client_header_timeout: "10"
 nginx_send_timeout: "10"
 nginx_buffers: "on"
-nginx_client_body_buffer_size: "8k"
+nginx_client_body_buffer_size: "1k"
 nginx_client_header_buffer_size: "1k"
 nginx_client_max_body_size: "2m"
 nginx_large_client_header_buffers: "2 1k"
