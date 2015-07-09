@@ -9,7 +9,7 @@ nginx_uid: 33
 nginx_gid: 33
 
 nginx_dir: "/etc/nginx"
-nginx_www_dir: "/var/www"
+nginx_www_dir: "/srv/www"
 nginx_log_dir: "/var/log/nginx"
 nginx_pid: "/var/run/nginx.pid"
 

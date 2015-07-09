@@ -6,23 +6,24 @@
   with_items:
     - libgeoip1
     - libgeoip-dev
+  when: nginx_source_modules_included.geoip is defined
 
 - name: Nginx | Modules | Create directory inside nginx
-  sudo: yes
   file: path={{nginx_dir}}/geoip state=directory
+  when: nginx_source_modules_included.geoip is defined
 
 - name: Nginx | Modules | Download GeoIP database files
-  sudo: yes
   get_url: url=http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz dest={{nginx_dir}}/geoip/GeoIP.dat.gz
+  when: nginx_source_modules_included.geoip is defined
 
 - name: Nginx | Modules | Download GeoLiteCity database files
-  sudo: yes
   get_url: url=http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz dest={{nginx_dir}}/geoip/GeoLiteCity.dat.gz
+  when: nginx_source_modules_included.geoip is defined
 
 - name: Nginx | Modules | Unarchive GeoIP files
-  sudo: yes
   shell: gunzip -c {{nginx_dir}}/geoip/GeoIP.dat.gz > {{nginx_dir}}/geoip/GeoIP.dat
+  when: nginx_source_modules_included.geoip is defined
 
 - name: Nginx | Modules | Unarchive GeoLiteCity files
-  sudo: yes
   shell: gunzip -c {{nginx_dir}}/geoip/GeoLiteCity.dat.gz > {{nginx_dir}}/geoip/GeoLiteCity.dat
+  when: nginx_source_modules_included.geoip is defined
