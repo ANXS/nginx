@@ -22,16 +22,16 @@
 
 - name: Nginx | Modules | Check if the GeoIP file exists
   stat: path={{nginx_dir}}/geoip/GeoIP.dat
-  register: geoip_file_exists
+  register: geoip_file
 
 - name: Nginx | Modules | Unarchive GeoIP files
   shell: gunzip -c {{nginx_dir}}/geoip/GeoIP.dat.gz > {{nginx_dir}}/geoip/GeoIP.dat
-  when: not geoip_file_exists is defined
+  when: geoip_file.exists is defined and not geoip_file.exists
 
 - name: Nginx | Modules | Check if the GeoLiteCity file exists
   stat: path={{nginx_dir}}/geoip/GeoLiteCity.dat
-  register: geolitecity_file_exists
+  register: geolitecity_file
 
 - name: Nginx | Modules | Unarchive GeoLiteCity files
   shell: gunzip -c {{nginx_dir}}/geoip/GeoLiteCity.dat.gz > {{nginx_dir}}/geoip/GeoLiteCity.dat
-  when: not geolitecity_file_exists is defined
+  when: geolitecity_file.exists is defined and not geolitecity_file.exists
