@@ -20,13 +20,15 @@
   get_url: url=http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz dest={{nginx_dir}}/geoip/GeoLiteCity.dat.gz
   when: nginx_source_modules_included.geoip is defined
 
+
 - name: Nginx | Modules | Check if the GeoIP file exists
   stat: path={{nginx_dir}}/geoip/GeoIP.dat
   register: geoip_file
 
 - name: Nginx | Modules | Unarchive GeoIP files
   shell: gunzip -c {{nginx_dir}}/geoip/GeoIP.dat.gz > {{nginx_dir}}/geoip/GeoIP.dat
-  when: geoip_file.exists is defined and not geoip_file.exists
+  when: geoip_file.exists is defined and geoip_file.exists == False
+
 
 - name: Nginx | Modules | Check if the GeoLiteCity file exists
   stat: path={{nginx_dir}}/geoip/GeoLiteCity.dat
@@ -34,4 +36,4 @@
 
 - name: Nginx | Modules | Unarchive GeoLiteCity files
   shell: gunzip -c {{nginx_dir}}/geoip/GeoLiteCity.dat.gz > {{nginx_dir}}/geoip/GeoLiteCity.dat
-  when: geolitecity_file.exists is defined and not geolitecity_file.exists
+  when: geolitecity_file.exists is defined and geolitecity_file.exists == False
