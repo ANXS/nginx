@@ -25,15 +25,19 @@
   stat: path={{nginx_dir}}/geoip/GeoIP.dat
   register: geoip_file
 
+- debug: var=geoip_file
+
 - name: Nginx | Modules | Unarchive GeoIP files
   shell: gunzip -c {{nginx_dir}}/geoip/GeoIP.dat.gz > {{nginx_dir}}/geoip/GeoIP.dat
-  when: geoip_file.exists is defined and geoip_file.exists == False
+  when: not geoip_file.stat.exists
 
 
 - name: Nginx | Modules | Check if the GeoLiteCity file exists
   stat: path={{nginx_dir}}/geoip/GeoLiteCity.dat
   register: geolitecity_file
 
+- debug: var=geoip_file
+
 - name: Nginx | Modules | Unarchive GeoLiteCity files
   shell: gunzip -c {{nginx_dir}}/geoip/GeoLiteCity.dat.gz > {{nginx_dir}}/geoip/GeoLiteCity.dat
-  when: geolitecity_file.exists is defined and geolitecity_file.exists == False
+  when: not geolitecity_file.stat.exists
