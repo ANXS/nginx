@@ -100,6 +100,7 @@ nginx_source_modules_included:
   http_perl_module: "--with-http_perl_module"
   naxsi_module: "--add-module=/tmp/naxsi-{{nginx_naxsi_version}}/naxsi_src"
   ngx_pagespeed: "--add-module=/tmp/ngx_pagespeed-release-{{nginx_ngx_pagespeed_version}}-beta"
+  geopip: "--with-http_geoip_module"
 ```
 
 ##### Sites
@@ -187,6 +188,11 @@ You can put Nginx under monit monitoring protection, by setting `monit_protectio
 ###### naxsi module
 - `nginx_naxsi_version` - version of the naxsi module
 
+###### geoip module
+- `nginx_geoip: 'on'`
+- `nginx_geoip_country: "{{nginx_dir}}/geoip/GeoIP.dat"`
+- `nginx_geoip_city: "{{nginx_dir}}/geoip/GeoLiteCity.dat"`
+
 #### Thanks
 
 To the contributors:
@@ -194,7 +200,7 @@ To the contributors:
 
 
 #### Testing
-This project comes with a VagrantFile, this is a fast and easy way to test changes to the role, fire it up with `vagrant up`. 
+This project comes with a VagrantFile, this is a fast and easy way to test changes to the role, fire it up with `vagrant up`.
 
 See [vagrant docs](https://docs.vagrantup.com/v2/) for getting setup with vagrant
 
