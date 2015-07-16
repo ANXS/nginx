@@ -1,7 +1,7 @@
 # file: nginx/defaults/main.yml
 
 nginx_install_method: "source"
-nginx_source_version: "1.6.2"
+nginx_source_version: "1.8.0"
 
 nginx_user: www-data
 nginx_group: www-data
@@ -25,7 +25,7 @@ nginx_multi_accept: 'on'
 nginx_event: null
 nginx_charset: null
 nginx_disable_access_log: no
-nginx_server_tokens: null
+nginx_server_tokens: 'off'
 nginx_sendfile: 'on'
 nginx_keepalive: "on"
 nginx_keepalive_timeout: "30"
@@ -33,7 +33,7 @@ nginx_client_body_timeout: "10"
 nginx_client_header_timeout: "10"
 nginx_send_timeout: "10"
 nginx_buffers: "on"
-nginx_client_body_buffer_size: "8k"
+nginx_client_body_buffer_size: "1k"
 nginx_client_header_buffer_size: "1k"
 nginx_client_max_body_size: "2m"
 nginx_large_client_header_buffers: "2 1k"
@@ -83,6 +83,7 @@ nginx_source_modules_included:
   http_perl_module: "--with-http_perl_module"
   naxsi_module: "--add-module=/tmp/naxsi-{{nginx_naxsi_version}}/naxsi_src"
   ngx_pagespeed: "--add-module=/tmp/ngx_pagespeed-release-{{nginx_ngx_pagespeed_version}}-beta"
+  geoip: "--with-http_geoip_module"
 
 nginx_source_modules_excluded:
   - mail_pop3_module
@@ -117,6 +118,10 @@ nginx_gzip_types:
   - image/svg+xml
 nginx_gzip_disable: "MSIE [1-6]\\."
 
+# geoip_module
+nginx_geoip: 'on'
+nginx_geoip_country: "{{nginx_dir}}/geoip/GeoIP.dat"
+nginx_geoip_city: "{{nginx_dir}}/geoip/GeoLiteCity.dat"
 
 # http_stub_status_module configuration
 nginx_remote_ip_var: "remote_addr"
@@ -164,7 +169,7 @@ nginx_naxsi_url: "https://github.com/nbs-system/naxsi/archive/{{nginx_naxsi_vers
 nginx_ngx_pagespeed_version: 1.9.32.3
 
 # OpenSSL configuration
-openssl_version: "1.0.2c"
+openssl_version: "1.0.2d"
 
 # Hostname update
 hostname_update: false
