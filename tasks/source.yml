@@ -64,3 +64,7 @@
   service:
     name: nginx
     enabled: yes
+
+- name: Nginx | set up logrotate
+  template: src=logrotate.conf.j2 dest=/etc/logrotate.d/nginx.conf
+  when: nginx_logrotate

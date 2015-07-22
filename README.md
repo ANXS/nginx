@@ -143,6 +143,27 @@ nginx_disabled_sites:
 ##### Monit ?
 You can put Nginx under monit monitoring protection, by setting `monit_protection: yes`
 
+##### logrotate
+If the value of the variable `nginx_install_method` is source the role will by default set up [logrotate](http://linux.die.net/man/8/logrotate) for you.
+You can prevent this step by setting the variable `nginx_logrotate` to `no`.
+
+```yaml
+nginx_logrorate: no
+```
+
+The variable `nginx_logrotate_options` is used to define logrotate options as a list. Following logrotate options are
+set by default:
+
+```yaml
+nginx_logrotate_options:
+  - daily
+  - missingok
+  - compress
+  - delaycompress
+  - rotate 52
+  - notifempty
+  - sharedscripts
+```
 
 ##### Modules
 
