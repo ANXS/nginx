@@ -70,6 +70,12 @@ Currently it's been developed for, and tested on Ubuntu. It is assumed to work o
             format: '$remote_addr - $remote_user [$time_local] "$request" $status $body_bytes_sent "$http_referer" "$http_user_agent"'
             options: null
             filename: "access.log"
+
+        #This will generate access_log /var/log/nginx/access.log combined
+        nginx_access_logs:
+          - name: "combined"
+            filename: "access.log"
+
 - `nginx_default_root` - the directory to place the default site
 - `nginx_default_enable` - whether or not to actually enable the defaul site
 
