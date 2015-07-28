@@ -187,6 +187,14 @@ You can put Nginx under monit monitoring protection, by setting `monit_protectio
 ###### naxsi module
 - `nginx_naxsi_version` - version of the naxsi module
 
+<<<<<<< HEAD
+=======
+###### geoip module
+- `nginx_geoip: 'on'`
+- `nginx_geoip_country: "{{nginx_dir}}/geoip/GeoIP.dat"`
+- `nginx_geoip_city: "{{nginx_dir}}/geoip/GeoLiteCity.dat"`
+
+>>>>>>> 71917b087691252188d2604c0d461a2e6e445a4e
 #### Thanks
 
 To the contributors:
