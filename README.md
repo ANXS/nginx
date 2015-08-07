@@ -1,4 +1,4 @@
-## ANXS - nginx [![Build Status](https://travis-ci.org/ANXS/nginx.svg?branch=master)](https://travis-ci.org/ANXS/nginx)
+## ANXS - nginx [![Build Status](https://travis-ci.org/ANXS/nginx.svg?branch=master)](https://travis-ci.org/robertobermejo/nginx)
 
 Ansible role which installs and configures Nginx, from a package or from source (including a series of optional modules).
 
