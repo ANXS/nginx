@@ -13,6 +13,10 @@ nginx_www_dir: "/srv/www"
 nginx_log_dir: "/var/log/nginx"
 nginx_pid: "/var/run/nginx.pid"
 
+# package
+nginx_base_repo_url:  http://nginx.org/packages
+nginx_state_package: present
+nginx_state_key: present
 
 # nginx.conf
 nginx_worker_processes: 4

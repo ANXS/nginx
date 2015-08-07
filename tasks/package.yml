@@ -1,13 +1,13 @@
 # file: nginx/tasks/package.yml
 
-- name: Nginx | Make sure the ansible required dependencies are installed
-  apt:
-    pkg: python-pycurl
-    state: present
+- name: Nginx | Add the nginx key 
+  apt_key: url=http://nginx.org/keys/nginx_signing.key state={{nginx_state_key}}
 
-- name: Nginx | Add the nginx repository
-  apt_repository:
-    repo: ppa:nginx/stable
+- name: Nginx | Add the repository
+  apt_repository: repo='deb {{nginx_base_repo_url}}/{{ansible_os_family|lower}}/ {{ansible_lsb.codename}} nginx' state={{nginx_state_package}} update_cache=no
+
+- name: Nginx | Add the src repository
+  apt_repository: repo='deb-src {{nginx_base_repo_url}}/{{ansible_os_family|lower}}/ {{ansible_lsb.codename}} nginx' state={{nginx_state_package}} update_cache=yes
 
 - name: Nginx | Make sure nginx is installed (package)
   apt:
