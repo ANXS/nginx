@@ -2,10 +2,16 @@
 # configure flag: --with-http_ssl_module
 
 - name: get openssl source
-  get_url:
-    url: "https://www.openssl.org/source/openssl-{{ openssl_version }}.tar.gz"
-    dest: "/tmp/openssl-{{ openssl_version }}.tar.gz"
+  shell: "wget https://www.openssl.org/source/openssl-{{ openssl_version }}.tar.gz"
+  args:
+    chdir: /tmp
+    creates: "/tmp/openssl-{{ openssl_version }}.tar.gz"
   when: nginx_source_modules_included.openssl is defined
+
+  #get_url:
+  #  url: "https://www.openssl.org/source/openssl-{{ openssl_version }}.tar.gz"
+  #  dest: "/tmp/openssl-{{ openssl_version }}.tar.gz"
+  #when: nginx_source_modules_included.openssl is defined
 
 - name: extract openssl source
   command: "tar -xf /tmp/openssl-{{ openssl_version }}.tar.gz"
