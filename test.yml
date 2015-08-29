@@ -6,6 +6,7 @@
       apt:
         pkg: "{{item}}"
         state: present
+        update_cache: yes
       with_items: ["perl", "libperl-dev", "monit", "build-essential"]
     - include: 'tasks/main.yml'
     - name: Nginx | Check if nginx is available
