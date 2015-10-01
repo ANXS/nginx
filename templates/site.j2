@@ -2,14 +2,26 @@ server {
 
 {% for k,v in item.server.iteritems() %}
 {% if k.find('location') == -1 and k != 'name' %}
+{% if v is not string and v is iterable %}
+{% for lv in v %}
+  {{ k }} {{ lv }};
+{% endfor %}
+{% else %}
   {{ k }} {{ v }};
+{% endif %}
 {% endif %}
 {% endfor %}
 
 {% for k,v in item.server.iteritems() if k.find('location') != -1 %}
   location {{ v.name }} {
 {% for x,y in v.iteritems() if x != 'name' %}
+{% if y is not string and y is iterable %}
+{% for ly in y %}
+    {{ x }} {{ ly }};
+{% endfor %}
+{% else %}
     {{ x }} {{ y }};
+{% endif %}
 {% endfor %}
   }
 {% endfor %}
