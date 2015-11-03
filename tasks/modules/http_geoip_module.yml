@@ -1,0 +1,37 @@
+# file: nginx/tasks/modules/http_geoip_module.yml
+# configure flag: --with-http_geoip_module
+
+- name: Nginx | Modules | Install GeoIp lib
+  apt: pkg={{ item }} state=latest
+  with_items:
+    - libgeoip1
+    - libgeoip-dev
+  when: nginx_source_modules_included.http_geoip_module is defined
+
+- name: Nginx | Modules | Create directory inside nginx
+  file: path={{nginx_dir}}/geoip state=directory
+  when: nginx_source_modules_included.http_geoip_module is defined
+
+- name: Nginx | Modules | Download GeoIP database files
+  get_url: url=http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz dest={{nginx_dir}}/geoip/GeoIP.dat.gz
+  when: nginx_source_modules_included.http_geoip_module is defined
+
+- name: Nginx | Modules | Download GeoLiteCity database files
+  get_url: url=http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz dest={{nginx_dir}}/geoip/GeoLiteCity.dat.gz
+  when: nginx_source_modules_included.http_geoip_module is defined
+
+- name: Nginx | Modules | Check if the GeoIP file exists
+  stat: path={{nginx_dir}}/geoip/GeoIP.dat
+  register: geoip_file
+
+- name: Nginx | Modules | Unarchive GeoIP files
+  shell: gunzip -c {{nginx_dir}}/geoip/GeoIP.dat.gz > {{nginx_dir}}/geoip/GeoIP.dat
+  when: not geoip_file.stat.exists
+
+- name: Nginx | Modules | Check if the GeoLiteCity file exists
+  stat: path={{nginx_dir}}/geoip/GeoLiteCity.dat
+  register: geolitecity_file
+
+- name: Nginx | Modules | Unarchive GeoLiteCity files
+  shell: gunzip -c {{nginx_dir}}/geoip/GeoLiteCity.dat.gz > {{nginx_dir}}/geoip/GeoLiteCity.dat
+  when: not geolitecity_file.stat.exists

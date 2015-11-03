@@ -74,6 +74,13 @@ http {
   gzip_disable     "{{nginx_gzip_disable}}";
 {% endif %}
 
+{% if nginx_install_method == "source" %}
+{% if nginx_geoip == 'on' %}
+  geoip_country {{nginx_geoip_country}};
+  geoip_city {{nginx_geoip_city}};
+{% endif %}
+{% endif %}
+
 {% if nginx_buffers == 'on' %}
   client_body_buffer_size  {{nginx_client_body_buffer_size}};
   client_header_buffer_size  {{nginx_client_header_buffer_size}};
