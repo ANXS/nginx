@@ -165,3 +165,6 @@ nginx_ngx_pagespeed_version: 1.9.32.4
 
 # OpenSSL configuration
 openssl_version: "1.0.2d"
+
+# Hostname update
+hostname_update: true
