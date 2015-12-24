@@ -1,0 +1,13 @@
+# file: nginx/tasks/install_yum.yml
+
+- name: Nginx | Add the nginx repository
+  template:
+    src: nginx.repo.j2
+    dest: /etc/yum.repos.d/nginx.repo
+
+- name: Nginx | Make sure nginx is installed (package)
+  yum:
+    pkg: nginx
+    state: present
+  notify:
+    - restart nginx

@@ -1,4 +1,4 @@
-# file: nginx/tasks/package.yml
+# file: nginx/tasks/install_apt.yml
 
 - name: Nginx | Make sure the ansible required dependencies are installed
   apt:
@@ -15,5 +15,3 @@
     state: present
   notify:
     - restart nginx
-
-- include: directories.yml
