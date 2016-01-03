@@ -7,7 +7,7 @@
         pkg: "{{item}}"
         state: present
         update_cache: yes
-      with_items: ["perl", "libperl-dev", "monit", "build-essential"]
+      with_items: ["perl", "libperl-dev", "monit", "build-essential", "python-httplib2"]
     - include: 'tasks/main.yml'
     - name: Nginx | Check if nginx is available
       uri: url="http://127.0.0.1" status=200
