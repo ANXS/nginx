@@ -2,7 +2,7 @@
 
 nginx_install_method: "source"
 nginx_source_version: "1.8.0"
-ngins: "nginx"
+nginx: "nginx"
 
 nginx_user: www-data
 nginx_group: www-data
