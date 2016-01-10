@@ -37,7 +37,7 @@
 
 - name: Nginx | Compile the Nginx source
   shell: >
-    cd /tmp/nginx-{{nginx_source_version}} &&
+    cd /tmp/{{nginx}}-{{nginx_source_version}} &&
     ./configure {{nginx_source_configure_flags}} &&
     make &&
     make install
