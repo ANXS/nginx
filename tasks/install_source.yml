@@ -1,4 +1,4 @@
-# file: nginx/tasks/source.yml
+# file: nginx/tasks/install_source.yml
 
 - include: user.yml
 - include: directories.yml

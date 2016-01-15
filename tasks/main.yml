@@ -1,9 +1,12 @@
 # file: nginx/tasks/main.yml
 
-- include: package.yml
-  when: nginx_install_method == "package"
-- include: source.yml
+- include: install_apt.yml
+  when: nginx_install_method == "package" and ansible_pkg_mgr == "apt"
+- include: install_yum.yml
+  when: nginx_install_method == "package" and ansible_pkg_mgr == "yum"
+- include: install_source.yml
   when: nginx_install_method == "source"
+- include: directories.yml
 - include: scripts.yml
 - include: configure.yml
 - include: default_site.yml
