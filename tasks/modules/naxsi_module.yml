@@ -11,7 +11,7 @@
 
 - name: Nginx | Modules | Make sure the naxsi_module configuration is up to date
   copy:
-    src: ../../files/naxsi_core.rules
+    src: naxsi_core.rules
     dest: "{{nginx_dir}}/naxsi_core.rules"
     owner: root
     group: root
