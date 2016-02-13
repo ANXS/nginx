@@ -3,7 +3,7 @@
 
 - name: Nginx | Modules | Update the http_gzip_static_module configuration
   template:
-    src: ../../templates/modules/http_gzip_static.conf.j2
+    src: templates/modules/http_gzip_static.conf.j2
     dest: "{{nginx_dir}}/conf.d/http_gzip_static.conf"
     owner: root
     group: root
