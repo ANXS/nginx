@@ -4,10 +4,10 @@ nginx_install_method: "source"
 nginx_source_version: "1.8.0"
 nginx: "nginx"
 
-nginx_user: www-data
-nginx_group: www-data
-nginx_uid: 33
-nginx_gid: 33
+nginx_user: "www-data"
+nginx_group: "www-data"
+nginx_uid: "33"
+nginx_gid: "33"
 
 nginx_dir: "/etc/nginx"
 nginx_www_dir: "/srv/www"
@@ -16,18 +16,22 @@ nginx_pid: "/var/run/nginx.pid"
 
 
 # nginx.conf
-nginx_worker_processes: 4
+# Remember:
+# each nginx client need at least 2 connections.
+# nginx_worker_processes * nginx_worker_connections = nginx_maximum_clients
+# nginx_worker_rlimit_nofile must be set (minimum) to nginx_maximum_clients * 2
+nginx_worker_processes: "{{ ansible_processor_cores }}"
 nginx_daemon_disable: no
-nginx_worker_rlimit_nofile: null
+nginx_worker_rlimit_nofile: "{{ 2 * nginx_worker_connections * ansible_processor_cores }}"
 nginx_error_log_options: null
-nginx_error_log_filename: 'error.log'
+nginx_error_log_filename: "error.log"
 nginx_worker_connections: 1024
-nginx_multi_accept: 'on'
+nginx_multi_accept: "on"
 nginx_event: null
 nginx_charset: null
 nginx_disable_access_log: no
-nginx_server_tokens: 'off'
-nginx_sendfile: 'on'
+nginx_server_tokens: "off"
+nginx_sendfile: "on"
 nginx_keepalive: "on"
 nginx_keepalive_timeout: "30"
 nginx_client_body_timeout: "10"
@@ -95,11 +99,11 @@ nginx_source_configure_flags: "{{nginx_source_default_configure_flags}}{% for ke
 
 
 # gzip_module
-nginx_gzip: 'on'
+nginx_gzip: "on"
 nginx_gzip_http_version: 1.1
 nginx_gzip_comp_level: 2
 nginx_gzip_proxied: expired no-cache no-store private auth
-nginx_gzip_vary: 'on'
+nginx_gzip_vary: "on"
 nginx_gzip_buffers: null
 nginx_gzip_min_length: 10240
 nginx_gzip_types:
@@ -120,7 +124,7 @@ nginx_gzip_types:
 nginx_gzip_disable: "MSIE [1-6]\\."
 
 # geoip_module
-nginx_geoip: 'off'
+nginx_geoip: "off"
 nginx_geoip_country: "{{nginx_dir}}/geoip/GeoIP.dat"
 nginx_geoip_city: "{{nginx_dir}}/geoip/GeoLiteCity.dat"
 
