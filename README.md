@@ -106,7 +106,7 @@ nginx_source_modules_included:
   http_perl_module: "--with-http_perl_module"
   naxsi_module: "--add-module=/tmp/naxsi-{{nginx_naxsi_version}}/naxsi_src"
   ngx_pagespeed: "--add-module=/tmp/ngx_pagespeed-release-{{nginx_ngx_pagespeed_version}}-beta"
-  geopip: "--with-http_geoip_module"
+  http_geoip_module: "--with-http_geoip_module"
 ```
 
 ##### Sites
