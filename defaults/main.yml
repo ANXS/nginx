@@ -146,6 +146,11 @@ nginx_headers_more_version: "0.261"
 nginx_headers_more_url: "https://github.com/agentzh/headers-more-nginx-module/archive/v{{nginx_headers_more_version}}.tar.gz"
 
 
+# ngx_cache_purge configuration
+ngx_cache_purge_version: "2.3"
+ngx_cache_purge_url: "http://labs.frickle.com/files/ngx_cache_purge-{{ngx_cache_purge_version}}.tar.gz"
+
+
 # http_auth_request_module configuration
 nginx_auth_request_release: "662785733552"
 nginx_auth_request_url: "http://mdounin.ru/hg/ngx_http_auth_request_module/archive/{{nginx_auth_request_release}}.tar.gz"

@@ -1,0 +1,11 @@
+# file: nginx/tasks/modules/ngx_cache_purge.yml
+# configure flag: --add-module=/tmp/ngx_cache_purge
+
+- name: Nginx | Modules | Download the ngx_cache_purge source
+  get_url:
+    url: "{{ngx_cache_purge_url}}"
+    dest: "/tmp/ngx_cache_purge-{{ngx_cache_purge_version}}.tar.gz"
+
+- name: Nginx | Modules | Unpack the ngx_cache_purge source
+  command: tar -xvzf /tmp/ngx_cache_purge-{{ngx_cache_purge_version}}.tar.gz
+    chdir=/tmp creates=/tmp/ngx_cache_purge-{{ngx_cache_purge_version}}
