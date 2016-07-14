@@ -84,6 +84,7 @@ nginx_source_modules_included:
   http_perl_module: "--with-http_perl_module"
   naxsi_module: "--add-module=/tmp/naxsi-{{nginx_naxsi_version}}/naxsi_src"
   ngx_pagespeed: "--add-module=/tmp/ngx_pagespeed-release-{{nginx_ngx_pagespeed_version}}-beta"
+  ngx_cache_purge: "--add-module=/tmp/ngx_cache_purge-{{ngx_cache_purge_version}}"
   http_geoip_module: "--with-http_geoip_module"
 
 nginx_source_modules_excluded:
@@ -144,6 +145,11 @@ nginx_upload_progress_url: "https://github.com/masterzen/nginx-upload-progress-m
 # headers_more_module configuration
 nginx_headers_more_version: "0.261"
 nginx_headers_more_url: "https://github.com/agentzh/headers-more-nginx-module/archive/v{{nginx_headers_more_version}}.tar.gz"
+
+
+# ngx_cache_purge configuration
+ngx_cache_purge_version: "2.3"
+ngx_cache_purge_url: "http://labs.frickle.com/files/ngx_cache_purge-{{ngx_cache_purge_version}}.tar.gz"
 
 
 # http_auth_request_module configuration
