@@ -32,12 +32,12 @@
 
 - name: Nginx | Check the current password expiry
   command: grep {{nginx_user}} /etc/shadow
-  sudo: yes
+  become: yes
   register: nginx_old_password
   changed_when: false
 
 - name: Nginx | Set the right expiration on the nginx user
   shell: "chage -I -1 -E -1 -m -1 -M -1 -W -1 -E -1 {{nginx_user}} && grep {{nginx_user}} /etc/shadow"
-  sudo: yes
+  become: yes
   register: nginx_new_password
   changed_when: nginx_new_password.stdout != nginx_old_password.stdout
