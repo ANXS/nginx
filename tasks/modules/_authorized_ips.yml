@@ -2,7 +2,7 @@
 
 - name: Nginx | Modules | Updated the authorized_ip file
   template:
-    src: ../../templates/modules/authorized_ips.j2
+    src: templates/modules/authorized_ips.j2
     dest: "{{nginx_dir}}/authorized_ips"
     owner: root
     group: root
