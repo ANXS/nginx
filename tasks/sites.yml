@@ -17,6 +17,7 @@
     group: "{{nginx_user}}"
     mode: 0755
   with_items: nginx_sites
+  when: nginx_sites|lower != 'none'
 
 - name: Nginx | Enable sites
   file:
