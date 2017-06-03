@@ -1,0 +1,26 @@
+# file: nginx/tasks/modules/rtmp_module.yml
+# configure flag: --add-module=/tmp/nginx-rtmp-module-{{nginx_rtmp_version}}
+
+- name: Nginx | Modules | Make sure nginx-rtmp-module dependencies are installed
+  apt:
+    pkg: "{{item}}"
+  with_items:
+    - libpcre3
+    - libpcre3-dev
+    - libssl-dev
+
+- name: Nginx | Modules | Gather nginx-rtmp-module tarball facts
+  stat: path=/tmp/nginx-rtmp-module-{{nginx_rtmp_version}}.tar.gz
+  register: nginx_rtmp_module_tarball
+
+- name: Nginx | Modules | Download the nginx-rtmp-module source
+  get_url:
+    url: "https://github.com/arut/nginx-rtmp-module/archive/v{{ nginx_rtmp_version }}.tar.gz"
+    dest: "/tmp/nginx-rtmp-module-{{nginx_rtmp_version}}.tar.gz"
+  when: not nginx_rtmp_module_tarball.stat.exists
+
+- name: Nginx | Modules | Unpack the nginx-rtmp-module source
+  command: tar -xvzf /tmp/nginx-rtmp-module-{{nginx_rtmp_version}}.tar.gz
+  args:
+    chdir: /tmp
+    creates: "/tmp/nginx-rtmp-module-{{nginx_rtmp_version}}"

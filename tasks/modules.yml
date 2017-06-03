@@ -41,3 +41,6 @@
 
 - include: modules/http_geoip_module.yml
   when: nginx_source_modules_included.http_geoip_module is defined
+
+- include: modules/rtmp_module.yml
+  when: nginx_source_modules_included.nginx_rtmp_module is defined
