@@ -52,6 +52,16 @@ http {
   tcp_nopush on;
   tcp_nodelay on;
 
+{% if nginx_use_upstream is defined and nginx_use_upstream == 'yes' %}
+  upstream {{ nginx_upstream_name }} {
+    {{ nginx_upstream_servers }}
+
+    {% for k,v in nginx_upstream_options.iteritems() %}
+      {{ k }} {{ v }};
+    {% endfor %}
+  }
+{% endif %}
+
 {% if nginx_keepalive == 'on' %}
   # Timeouts
   keepalive_timeout  {{nginx_keepalive_timeout}};
