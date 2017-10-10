@@ -46,9 +46,3 @@
   when: not nginx_default_enable
   notify:
     - reload nginx
-
-- name: Nginx | Reload if we just created index.html
-  service:
-    name: nginx
-    state: reloaded
-  when: not nginx_default_index.stat.exists

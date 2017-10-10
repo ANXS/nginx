@@ -36,3 +36,6 @@
   notify:
     - reload nginx
   when: nginx_disabled_sites|lower != 'none'
+
+- name: Nginx | Set proper ownership to store buffer data
+  shell: "chown -R {{nginx_user}}:{{nginx_user}} /usr/local/nginx"
