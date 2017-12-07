@@ -24,3 +24,6 @@ script:
     || (echo 'Idempotence test: fail' && exit 1)
 after_failure:
   - cat /etc/nginx/nginx.conf
+
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/

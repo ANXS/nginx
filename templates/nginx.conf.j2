@@ -39,7 +39,7 @@ http {
 {% else %}
 {% for log in nginx_access_logs %}
 {% if 'format' in log %}
-  log_format  {{log['name']}}  {{log['format']}};
+  log_format  {{log['name']}}  '{{log['format']}}';
 {% endif %}
   access_log    {{nginx_log_dir}}/{{log['filename']}} {{log['name']}}{% if 'options' in log and log['options']|lower != 'none' %} {{log['options']}}{% endif %};
 {% endfor %}
