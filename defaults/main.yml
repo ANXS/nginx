@@ -81,9 +81,10 @@ nginx_source_modules_included:
   ipv6_module: "--with-ipv6"
   http_real_ip_module: "--with-http_realip_module"
   http_spdy_module: "--with-http_spdy_module"
+  http_v2_module: "--with-http_v2_module"
   http_perl_module: "--with-http_perl_module"
   naxsi_module: "--add-module=/tmp/naxsi-{{nginx_naxsi_version}}/naxsi_src"
-  ngx_pagespeed: "--add-module=/tmp/ngx_pagespeed-release-{{nginx_ngx_pagespeed_version}}-beta"
+  ngx_pagespeed: "--add-module=/tmp/incubator-pagespeed-ngx-{{nginx_ngx_pagespeed_version}}"
   http_geoip_module: "--with-http_geoip_module"
 
 nginx_source_modules_excluded:
@@ -167,7 +168,8 @@ nginx_naxsi_version: "0.53"
 nginx_naxsi_url: "https://github.com/nbs-system/naxsi/archive/{{nginx_naxsi_version}}.tar.gz"
 
 # ngx_pagespeed_module configuration
-nginx_ngx_pagespeed_version: 1.9.32.4
+nginx_ngx_pagespeed_version: 1.12.34.2-stable
+nginx_ngx_pagespeed_psol_version: 1.12.34.2-x64
 
 # OpenSSL configuration
 openssl_version: "1.0.2h"
